@@ -4,11 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@SQLDelete(sql = "UPDATE transaction SET deleted = true WHERE id=?")
+@Where(clause = "deleted=false")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -26,4 +30,5 @@ public class Transaction {
     private String note;
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
+    private boolean deleted = Boolean.FALSE;
 }

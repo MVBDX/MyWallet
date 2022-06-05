@@ -4,11 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@SQLDelete(sql = "UPDATE customer SET deleted = true WHERE id=?")
+@Where(clause = "deleted=false")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -25,4 +29,5 @@ public class Customer {
     private String phone;
     @OneToMany(mappedBy = "customer")
     private Set<Account> accounts;
+    private boolean deleted = Boolean.FALSE;
 }
