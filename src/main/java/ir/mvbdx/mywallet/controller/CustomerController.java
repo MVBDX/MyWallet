@@ -1,7 +1,7 @@
 package ir.mvbdx.mywallet.controller;
 
 import ir.mvbdx.mywallet.entity.Customer;
-import ir.mvbdx.mywallet.service.CustomerService;
+import ir.mvbdx.mywallet.service.BaseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping(value = {"/api/customer", "/api/customers"})
 public class CustomerController {
 
-    private final CustomerService customerService;
+    private final BaseService<Customer> customerService;
 
     @PostMapping("/new")
     @ResponseStatus(HttpStatus.CREATED)
