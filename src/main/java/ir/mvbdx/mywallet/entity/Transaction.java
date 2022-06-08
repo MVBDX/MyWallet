@@ -26,6 +26,8 @@ public class Transaction {
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
     private Category category;
     private String note;
     @Temporal(TemporalType.TIMESTAMP)
