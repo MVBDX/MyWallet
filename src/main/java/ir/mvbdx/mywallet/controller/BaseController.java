@@ -2,11 +2,12 @@ package ir.mvbdx.mywallet.controller;
 
 import ir.mvbdx.mywallet.service.BaseService;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 
 public abstract class BaseController<T> {
 
