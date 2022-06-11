@@ -8,6 +8,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomerServiceImpl extends BaseServiceImpl<Customer> {
     public CustomerServiceImpl(@Qualifier("customerRepository") JpaRepository<Customer, Long> baseRepository) {
-        super(baseRepository);
+        super(baseRepository, "Customer");
     }
 }
