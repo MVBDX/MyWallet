@@ -11,7 +11,7 @@ import java.util.List;
 
 public abstract class BaseController<T> {
 
-    private final BaseService<T> baseService;
+    protected final BaseService<T> baseService;
 
     protected BaseController(BaseService<T> baseService) {
         this.baseService = baseService;
