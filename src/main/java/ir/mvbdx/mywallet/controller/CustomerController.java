@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.stereotype.Controller;
 
 @Controller
-@RequestMapping(value = {"/api/customer", "/api/customers"})
+@RequestMapping(value = {"/api/customer", "/customer"})
 public class CustomerController extends BaseController<Customer> {
 
     public CustomerController(@Qualifier("customerServiceImpl") BaseService<Customer> baseService) {
