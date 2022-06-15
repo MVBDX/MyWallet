@@ -8,8 +8,10 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.Where;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -27,12 +29,14 @@ public class Transaction {
     private Double amount;
     @ManyToOne
     @JoinColumn(name = "account_id")
+//    @NotNull
     private Account account;
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
     private String note;
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
@@ -41,4 +45,5 @@ public class Transaction {
     @Temporal(TemporalType.TIMESTAMP)
     private Date modifyDate;
     private boolean deleted = Boolean.FALSE;
+//    transaction for customer
 }
