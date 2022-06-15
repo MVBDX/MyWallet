@@ -1,0 +1,52 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Add Transaction</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          crossorigin="anonymous"/>
+</head>
+<body>
+
+<div class="container">
+
+    <h3>Add New Transaction</h3>
+    <hr/>
+
+    <form action="#" th:action="@{save}" th:object="${transactionForm}" method="POST">
+
+        <select th:field="*{type}" class="form-control col-4 mb-4">
+            <option value="" selected="selected">Select Transaction Type</option>
+            <option th:each="t : ${types}" th:value="${t}" th:text="${t}"/>
+        </select>
+
+        <div th:with="condition=${accounts.empty}">
+            <h6 th:if="${condition}" class="form-control col-4 mb-4">No Account. Create some!</h6>
+            <select th:unless="${condition}" th:field="*{account}" class="form-control col-4 mb-4">
+                <option value="" selected="selected">Select Account</option>
+                <option th:each="a : ${accounts}" th:value="${a.id}" th:text="${a.name + ' (' + a.balance + ')'}"/>
+            </select>
+        </div>
+
+        <div th:with="condition=${categories.empty}">
+            <h6 th:if="${condition}" class="form-control col-4 mb-4">No Category. Create some!</h6>
+            <select th:unless="${condition}" th:field="*{category}" class="form-control col-4 mb-4">
+                <option value="" selected="selected">Select Category</option>
+                <option th:each="c : ${categories}" th:value="${c.id}" th:text="${c.name}"/>
+            </select>
+        </div>
+
+        <input type="text" th:field="*{note}" class="form-control col-4 mb-4" placeholder="Enter item name"/>
+        <input type="number" th:field="*{amount}" class="form-control col-4 mb-4" placeholder="Enter amount"/>
+        <input type="date" th:field="*{date}" class="form-control col-4 mb-4"/>
+
+        <button type="submit" th:disabled="${accounts.empty || categories.empty}" class="btn btn-primary col-2">Save</button>
+
+    </form>
+    <hr/>
+    <a th:href="@{list}">Back to list</a>
+</div>
+</body>
+</html>

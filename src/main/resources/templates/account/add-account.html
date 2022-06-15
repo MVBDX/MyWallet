@@ -1,0 +1,35 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Add Account</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          crossorigin="anonymous"/>
+</head>
+<body>
+
+<div class="container">
+
+    <h3>Add New Account</h3>
+    <hr/>
+
+    <form action="#" th:action="@{save}" th:object="${accountForm}" method="POST">
+
+        <input type="text" th:field="*{name}" class="form-control col-4 mb-4" placeholder="Enter account name"/>
+        <input type="text" th:field="*{number}" class="form-control col-4 mb-4" placeholder="Enter account number"/>
+        <select th:field="*{type}" class="form-control col-4 mb-4">
+            <option value="" selected="selected">Select Account Type</option>
+            <option th:each="t : ${types}" th:value="${t}" th:text="${t}"/>
+        </select>
+        <input type="text" th:field="*{balance}" class="form-control col-4 mb-4" placeholder="Enter account balance"/>
+
+        <button type="submit" class="btn btn-primary col-2">Save</button>
+
+    </form>
+    <hr/>
+    <a th:href="@{list}">Back to list</a>
+</div>
+</body>
+</html>

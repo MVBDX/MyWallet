@@ -1,23 +1,18 @@
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Index Page</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          crossorigin="anonymous" />
 </head>
 <body>
-<form action="save" method="post">
-    <table>
-        <tr>
-            <td><label for="id">ID</label></td>
-            <td><input type="text" name="id"></input></td>
-        </tr>
-        <tr>
-            <td><label for="name">Name</label></td>
-            <td><input type="text" name="name"></input></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><input type="submit" value="Submit"></input></td>
-        </tr>
-    </table>
-</form>
+
+    <a th:href="@{/api/account/list}">Accounts</a>
+    <br>
+    <a th:href="@{/api/category/list}">Categories</a>
+    <br>
+    <a th:href="@{/api/transaction/list}">Transactions</a>
+
 </body>
 </html>
