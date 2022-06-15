@@ -11,5 +11,5 @@ public interface BaseService<T> {
 
     T update(Long id, T base);
 
-    boolean delete(Long id);
+    void delete(Long id);
 }

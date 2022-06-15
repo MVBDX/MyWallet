@@ -40,11 +40,10 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
     }
 
     @Override
-    public boolean delete(Long id) {
+    public void delete(Long id) {
         Optional<T> base = baseRepository.findById(id);
         if (base.isEmpty())
             throw new EntityNotFoundException(id, entityName);
         baseRepository.deleteById(id);
-        return true;
     }
 }

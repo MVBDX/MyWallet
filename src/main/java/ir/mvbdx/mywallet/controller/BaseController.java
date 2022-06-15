@@ -40,8 +40,8 @@ public abstract class BaseController<T> {
 
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public boolean delete(@PathVariable("id") Long id) {
-        return baseService.delete(id);
+    public void delete(@PathVariable("id") Long id) {
+        baseService.delete(id);
     }
 
 }
