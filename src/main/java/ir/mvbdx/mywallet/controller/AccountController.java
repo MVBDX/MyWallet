@@ -23,7 +23,7 @@ public class AccountController extends BaseController<Account> {
     }
 
     @GetMapping("/new")
-    public String showNewTransactionForm(Model model) {
+    public String showNewAccountForm(Model model) {
         model.addAttribute("accountForm", new Account());
         model.addAttribute("types",
                 Stream.of(AccountType.values())
