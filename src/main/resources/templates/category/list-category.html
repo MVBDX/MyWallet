@@ -1,6 +1,6 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>List Transactions</title>
+    <title>List Categories</title>
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
           integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
@@ -25,11 +25,16 @@
         <tr th:each="category: ${categories}">
             <td th:text="${category.id}"/>
             <td th:text="${category.name}"/>
-            <td><a th:href="@{edit/{id}(id=${category.id})}">Edit</a></td>
-            <td><a th:href="@{delete/{id}(id=${category.id})}">Delete</a></td>
+            <td><a th:href="@{edit/{id}(id=${category.id})}"><img alt="Edit" th:src="@{/images/edit.png}"/></a></td>
+            <td>
+                <form action="#" th:action="@{'delete/{id}'(id=${category.id})}" th:method="delete">
+                    <input type="image" th:src="@{/images/delete.png}" border="0"
+                           alt="Submit" onClick="return confirm('Are you sure to delete this category?')"/></form>
+            </td>
         </tr>
         </tbody>
     </table>
+    <a href="/">Back to Home</a>
 </div>
 </body>
 </html>

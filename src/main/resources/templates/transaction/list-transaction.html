@@ -1,44 +1,43 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <title>List Transactions</title>
-
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
           integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
-          crossorigin="anonymous" />
+          crossorigin="anonymous"/>
 </head>
-
 <body>
-
 <div class="container">
-
     <h3>List Transactions</h3>
-
     <hr/>
     <a th:href="@{new}" class="btn btn-primary">Add Transaction</a>
+    <a th:href="@{/}" class="btn btn-primary">Back to Home</a>
     <br/><br/>
     <table class="table table-bordered table-striped">
-
         <thead>
         <tr>
             <th>Amount</th>
             <th>Note</th>
             <th>Date</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="transaction: ${transactions}">
-            <td th:text="${transaction.amount}" />
-            <td th:text="${transaction.note}" />
-            <td th:text="${transaction.date}" />
+            <td th:text="${transaction.amount}"/>
+            <td th:text="${transaction.note}"/>
+            <td th:text="${transaction.date}"/>
+            <td><a th:href="@{edit/{id}(id=${transaction.id})}"><img alt="Edit" th:src="@{/images/edit.png}"/></a></td>
+            <td>
+                <form action="#" th:action="@{'delete/{id}'(id=${transaction.id})}" th:method="delete">
+                    <input type="image" th:src="@{/images/delete.png}" border="0"
+                           alt="Submit" onClick="return confirm('Are you sure to delete this transaction?')"/></form>
+            </td>
         </tr>
         </tbody>
-
     </table>
+    <a href="/">Back to Home</a>
 </div>
-
-
 </body>
-
 </html>

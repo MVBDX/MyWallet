@@ -27,11 +27,17 @@
             <td th:text="${account.id}"/>
             <td th:text="${account.name}"/>
             <td th:text="${account.balance}"/>
-            <td><a th:href="@{edit/{id}(id=${account.id})}">Edit</a></td>
-            <td><a th:href="@{delete/{id}(id=${account.id})}">Delete</a></td>
+            <td><a th:href="@{edit/{id}(id=${account.id})}"><img alt="Edit" th:src="@{/images/edit.png}"/></a></td>
+            <td>
+                <form action="#" th:action="@{'delete/{id}'(id=${account.id})}" th:method="delete">
+                    <input type="image" th:src="@{/images/delete.png}" border="0"
+                           alt="Submit" onClick="return confirm('Are you sure to delete this account?')"/></form>
+            </td>
         </tr>
         </tbody>
     </table>
+
+    <a href="/">Back to Home</a>
 </div>
 </body>
 </html>
