@@ -22,6 +22,7 @@ public class CategoryController extends BaseController<Category> {
     @GetMapping("/new")
     public String newCategory(Model model) {
         model.addAttribute("categoryForm", new Category());
+        model.addAttribute("categories", baseService.findAll());
         return "category/add-category";
     }
 

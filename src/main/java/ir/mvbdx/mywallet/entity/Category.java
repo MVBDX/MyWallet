@@ -20,5 +20,7 @@ public class Category {
     private String name;
     @OneToMany (mappedBy = "category")
     private Set<Transaction> transactions;
-
+    @ManyToOne
+    @JoinColumn(name = "parent_id")
+    private Category parentCategory;
 }
