@@ -5,6 +5,7 @@ import ir.mvbdx.mywallet.entity.Category;
 import ir.mvbdx.mywallet.entity.Transaction;
 import ir.mvbdx.mywallet.entity.TransactionType;
 import ir.mvbdx.mywallet.service.BaseService;
+import ir.mvbdx.mywallet.service.impl.TransactionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.ui.Model;
@@ -43,11 +44,11 @@ public class TransactionController extends BaseController<Transaction> {
         model.addAttribute("transactionForm", new Transaction());
         model.addAttribute("accounts", accountList);
         model.addAttribute("categories", categoryList);
-        model.addAttribute("currentDate", LocalDate.now() );
+        model.addAttribute("currentDate", LocalDate.now());
         model.addAttribute("types",
                 Stream.of(TransactionType.values())
-                .map(Enum::name)
-                .collect(Collectors.toList()));
+                        .map(Enum::name)
+                        .collect(Collectors.toList()));
         return "transaction/add-transaction";
     }
 
@@ -55,6 +56,10 @@ public class TransactionController extends BaseController<Transaction> {
     public ModelAndView getAllTransaction() {
         ModelAndView mav = new ModelAndView("transaction/list-transaction");
         mav.addObject("transactions", super.baseService.findAll());
+        TransactionServiceImpl downCastedTransactionService = (TransactionServiceImpl) baseService;
+        mav.addObject("totalIncome", downCastedTransactionService.totalIncome());
+        mav.addObject("totalSpend", downCastedTransactionService.totalSpend());
+        mav.addObject("totalBalance", downCastedTransactionService.totalBalance());
         return mav;
     }
 

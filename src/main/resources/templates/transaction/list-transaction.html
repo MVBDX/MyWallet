@@ -36,6 +36,14 @@
             </td>
         </tr>
         </tbody>
+        <tfoot>
+        <tr>
+            <td style="background-color: black; color: yellow">Total</td>
+            <td th:text="'Income: ' + ${totalIncome}" th:style="'color:white; background-color:green'"></td>
+            <td th:text="'Spend: ' + ${totalSpend}" th:style="'color:black; background-color:red'"></td>
+            <td th:text="'Balance: ' + ${totalBalance}" th:style="'color:blue; background-color:deepskyblue'"></td>
+        </tr>
+        </tfoot>
     </table>
     <a href="/">Back to Home</a>
 </div>
