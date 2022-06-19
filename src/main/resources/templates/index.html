@@ -1,18 +1,16 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Index Page</title>
+    <title>MyWallet</title>
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
           integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
-          crossorigin="anonymous" />
+          crossorigin="anonymous"/>
 </head>
 <body>
-
-    <a th:href="@{/api/account/list}">Accounts</a>
-    <br>
-    <a th:href="@{/api/category/list}">Categories</a>
-    <br>
-    <a th:href="@{/api/transaction/list}">Transactions</a>
-
+<div class="container">
+    <h3>Welcome to MyWallet!</h3>
+    <a th:href="@{/api/account/list}" class="btn btn-primary">Accounts</a>
+    <a th:href="@{/api/category/list}" class="btn btn-primary">Categories</a>
+    <a th:href="@{/api/transaction/list}" class="btn btn-primary">Transactions</a>
 </body>
 </html>
