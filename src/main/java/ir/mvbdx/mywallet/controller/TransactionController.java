@@ -21,6 +21,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static ir.mvbdx.mywallet.config.Formatter.getCurrencyFormat;
+
 @Controller
 @RequestMapping(value = {"/api/transaction", "/transaction"})
 public class TransactionController extends BaseController<Transaction> {
@@ -57,9 +59,9 @@ public class TransactionController extends BaseController<Transaction> {
         ModelAndView mav = new ModelAndView("transaction/list-transaction");
         mav.addObject("transactions", super.baseService.findAll());
         TransactionServiceImpl downCastedTransactionService = (TransactionServiceImpl) baseService;
-        mav.addObject("totalIncome", downCastedTransactionService.totalIncome());
-        mav.addObject("totalSpend", downCastedTransactionService.totalSpend());
-        mav.addObject("totalBalance", downCastedTransactionService.totalBalance());
+        mav.addObject("totalIncome", getCurrencyFormat(downCastedTransactionService.totalIncome()));
+        mav.addObject("totalSpend", getCurrencyFormat(downCastedTransactionService.totalSpend()));
+        mav.addObject("totalBalance", getCurrencyFormat(downCastedTransactionService.totalBalance()));
         return mav;
     }
 
