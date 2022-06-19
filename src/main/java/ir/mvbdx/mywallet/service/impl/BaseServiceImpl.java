@@ -13,7 +13,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public abstract class BaseServiceImpl<T> implements BaseService<T> {
 
-    private final JpaRepository<T, Long> baseRepository;
+    protected final JpaRepository<T, Long> baseRepository;
     private final String entityName;
 
     @Override
