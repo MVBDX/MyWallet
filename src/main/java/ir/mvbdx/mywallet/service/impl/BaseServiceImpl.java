@@ -14,7 +14,7 @@ import java.util.Optional;
 public abstract class BaseServiceImpl<T> implements BaseService<T> {
 
     protected final JpaRepository<T, Long> baseRepository;
-    private final String entityName;
+    protected final String entityName;
 
     @Override
     public T save(T base) {
