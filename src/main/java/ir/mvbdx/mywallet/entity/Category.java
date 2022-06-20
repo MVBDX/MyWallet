@@ -8,6 +8,7 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -27,5 +28,7 @@ public class Category {
     @ManyToOne
     @JoinColumn(name = "parent_id")
     private Category parentCategory;
+    @OneToMany(mappedBy="parentCategory")
+    private Set<Category> subordinates = new HashSet<>();
     private boolean deleted = Boolean.FALSE;
 }
