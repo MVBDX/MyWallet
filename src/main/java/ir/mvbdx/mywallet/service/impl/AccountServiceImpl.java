@@ -1,6 +1,8 @@
 package ir.mvbdx.mywallet.service.impl;
 
 import ir.mvbdx.mywallet.entity.Account;
+import ir.mvbdx.mywallet.exception.EntityHaveRelationException;
+import ir.mvbdx.mywallet.exception.EntityNotFoundException;
 import ir.mvbdx.mywallet.repository.AccountRepository;
 import ir.mvbdx.mywallet.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,17 @@ public class AccountServiceImpl extends BaseServiceImpl<Account> {
     public Double totalOutcome(Long accountId) {
         Optional<Account> account = accountRepository.findById(accountId);
         return transactionRepository.totalSpendOfAccount(account.get().getId());
+    }
+
+    @Override
+    public void delete(Long id) {
+        Optional<Account> base = accountRepository.findById(id);
+        if (base.isEmpty())
+            throw new EntityNotFoundException(id, entityName);
+        if (base.get().getTransactions().isEmpty())
+            baseRepository.deleteById(id);
+        else
+            throw new EntityHaveRelationException(entityName + " " + base.get().getName());
     }
 
 }
