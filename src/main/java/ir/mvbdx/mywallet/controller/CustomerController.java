@@ -1,17 +1,14 @@
 package ir.mvbdx.mywallet.controller;
 
-import ir.mvbdx.mywallet.entity.Customer;
-import ir.mvbdx.mywallet.service.BaseService;
-import org.springframework.beans.factory.annotation.Qualifier;
+import ir.mvbdx.mywallet.service.impl.CustomerServiceImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.stereotype.Controller;
 
 @Controller
-@RequestMapping(value = {"/api/customer", "/customer"})
-public class CustomerController extends BaseController<Customer> {
-
-    public CustomerController(@Qualifier("customerServiceImpl") BaseService<Customer> baseService) {
-        super(baseService);
-    }
+@RequestMapping("/customer")
+@RequiredArgsConstructor
+public class CustomerController {
+    private final CustomerServiceImpl service;
 
 }
