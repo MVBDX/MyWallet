@@ -10,7 +10,8 @@
 <div class="container">
     <h3>Add New Category</h3>
     <hr/>
-    <form action="#" th:action="@{save}" th:object="${categoryForm}" method="POST">
+    <form action="#" th:action="@{save}" th:object="${categoryForm}" th:method="${id == null} ? 'POST' : 'PUT'">
+        <input type="text" th:field="*{id}" th:readonly="true" class="form-control col-4 mb-4"/>
         <div th:with="condition=${categories.empty}">
             <h6 th:if="${condition}" class="form-control col-4 mb-4">No Category.</h6>
             <select th:unless="${condition}" th:field="*{parentCategory}" class="form-control col-4 mb-4">
@@ -22,7 +23,7 @@
         <button type="submit" class="btn btn-primary col-2">Save</button>
     </form>
     <hr/>
-    <a th:href="@{list}">Back to list</a>
+    <a th:href="@{/category/list}">Back to list</a>
 </div>
 </body>
 </html>

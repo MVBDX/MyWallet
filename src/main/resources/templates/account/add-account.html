@@ -14,9 +14,8 @@
 
     <h3>Add New Account</h3>
     <hr/>
-
-    <form action="#" th:action="@{save}" th:object="${accountForm}" method="POST">
-
+    <form action="#" th:action="@{save}" th:object="${accountForm}" th:method="${id == null} ? 'POST' : 'PUT'">
+        <input type="text" th:field="*{id}" th:readonly="true" class="form-control col-4 mb-4"/>
         <input type="text" th:field="*{name}" class="form-control col-4 mb-4" placeholder="Enter account name"/>
         <input type="text" th:field="*{number}" class="form-control col-4 mb-4" placeholder="Enter account number"/>
         <select th:field="*{type}" class="form-control col-4 mb-4">
@@ -24,12 +23,10 @@
             <option th:each="t : ${types}" th:value="${t}" th:text="${t}"/>
         </select>
         <input type="text" th:field="*{balance}" class="form-control col-4 mb-4" placeholder="Enter account balance"/>
-
         <button type="submit" class="btn btn-primary col-2">Save</button>
-
     </form>
     <hr/>
-    <a th:href="@{list}">Back to list</a>
+    <a th:href="@{/account/list}">Back to list</a>
 </div>
 </body>
 </html>
