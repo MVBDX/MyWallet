@@ -31,6 +31,7 @@ public class AccountController {
     public ModelAndView listAll() {
         ModelAndView mav = new ModelAndView("account/list-account");
         mav.addObject("accounts", service.findAll());
+        mav.addObject("totalBalance", service.totalBalance());
         return mav;
     }
 
