@@ -25,13 +25,13 @@
         </thead>
         <tbody>
         <tr th:each="transaction: ${transactions}">
-            <td th:text="${transaction.amount}"/>
+            <td th:text="${#numbers.formatDecimal(transaction.amount, 0, 'COMMA', 0, 'POINT')}"/>
             <td th:text="${transaction.note}"/>
             <td th:text="${transaction.date}"/>
             <td><a th:href="@{edit/{id}(id=${transaction.id})}"><img alt="Edit" th:src="@{/images/edit.png}"/></a></td>
             <td>
                 <form action="#" th:action="@{'delete/{id}'(id=${transaction.id})}" th:method="delete">
-                    <input type="image" th:src="@{/images/delete.png}" border="0"
+                    <input type="image" th:src="@{/images/delete.png}"
                            alt="Submit" onClick="return confirm('Are you sure to delete this transaction?')"/></form>
             </td>
         </tr>
@@ -39,9 +39,12 @@
         <tfoot>
         <tr>
             <td style="background-color: black; color: yellow">Total</td>
-            <td th:text="'Income: ' + ${totalIncome}" th:style="'color:white; background-color:green'"></td>
-            <td th:text="'Spend: ' + ${totalSpend}" th:style="'color:black; background-color:red'"></td>
-            <td th:text="'Balance: ' + ${totalBalance}" th:style="'color:blue; background-color:deepskyblue'"></td>
+            <td th:text="'Income: ' + ${#numbers.formatDecimal(totalIncome, 0, 'COMMA', 0, 'POINT')}"
+                th:style="'color:white; background-color:green'"></td>
+            <td th:text="'Spend: ' + ${#numbers.formatDecimal(totalSpend, 0, 'COMMA', 0, 'POINT')}"
+                th:style="'color:black; background-color:red'"></td>
+            <td th:text="'Balance: ' + ${#numbers.formatDecimal(totalBalance, 0, 'COMMA', 0, 'POINT')}"
+                th:style="'color:blue; background-color:deepskyblue'"></td>
         </tr>
         </tfoot>
     </table>

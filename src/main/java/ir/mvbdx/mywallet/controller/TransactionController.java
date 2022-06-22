@@ -18,8 +18,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static ir.mvbdx.mywallet.config.Formatter.getCurrencyFormat;
-
 @Controller
 @RequestMapping("/transaction")
 @RequiredArgsConstructor
@@ -48,9 +46,9 @@ public class TransactionController {
     public ModelAndView listAll() {
         ModelAndView mav = new ModelAndView("transaction/list-transaction");
         mav.addObject("transactions", service.findAll());
-        mav.addObject("totalIncome", getCurrencyFormat(service.totalIncome()));
-        mav.addObject("totalSpend", getCurrencyFormat(service.totalSpend()));
-        mav.addObject("totalBalance", getCurrencyFormat(service.totalBalance()));
+        mav.addObject("totalIncome", service.totalIncome());
+        mav.addObject("totalSpend", service.totalSpend());
+        mav.addObject("totalBalance", service.totalBalance());
         return mav;
     }
 
