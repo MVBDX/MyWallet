@@ -26,15 +26,23 @@
         <tr th:each="account: ${accounts}">
             <td th:text="${account.id}"/>
             <td th:text="${account.name}"/>
-            <td th:text="${account.balance}"/>
+            <td th:text="${#numbers.formatDecimal(account.balance, 0, 'COMMA', 0, 'POINT')}"/>
             <td><a th:href="@{edit/{id}(id=${account.id})}"><img alt="Edit" th:src="@{/images/edit.png}"/></a></td>
             <td>
                 <form action="#" th:action="@{'delete/{id}'(id=${account.id})}" th:method="delete">
-                    <input type="image" th:src="@{/images/delete.png}" border="0"
+                    <input type="image" th:src="@{/images/delete.png}"
                            alt="Submit" onClick="return confirm('Are you sure to delete this account?')"/></form>
             </td>
         </tr>
         </tbody>
+        <tfoot>
+        <tr>
+            <td></td>
+            <td style="background-color: black; color: yellow">Total</td>
+            <td th:text="${#numbers.formatDecimal(totalBalance, 0, 'COMMA', 0, 'POINT')}"
+                th:style="'color:white; background-color:green'"></td>
+        </tr>
+        </tfoot>
     </table>
 
     <a href="/">Back to Home</a>

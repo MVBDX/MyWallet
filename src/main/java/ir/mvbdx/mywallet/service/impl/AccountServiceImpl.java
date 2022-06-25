@@ -34,6 +34,10 @@ public class AccountServiceImpl extends BaseServiceImpl<Account> {
         return transactionRepository.totalSpendOfAccount(account.get().getId());
     }
 
+    public Double totalBalance() {
+        return accountRepository.totalBalance();
+    }
+
     @Override
     public void delete(Long id) {
         Optional<Account> base = accountRepository.findById(id);
