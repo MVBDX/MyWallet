@@ -57,7 +57,7 @@ public class AccountController {
         return "account/add-account";
     }
 
-    @DeleteMapping("/delete/{id}")
+    @GetMapping("/delete/{id}")
 //    @ResponseStatus(HttpStatus.OK) : is for rest
     public String delete(@PathVariable("id") Long id) {
         service.delete(id);

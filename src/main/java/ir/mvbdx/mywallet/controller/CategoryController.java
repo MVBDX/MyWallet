@@ -47,7 +47,7 @@ public class CategoryController {
         return "category/add-category";
     }
 
-    @DeleteMapping("/delete/{id}")
+    @GetMapping("/delete/{id}")
 //    @ResponseStatus(HttpStatus.OK) : is for rest
     public String delete(@PathVariable("id") Long id) {
         service.delete(id);
