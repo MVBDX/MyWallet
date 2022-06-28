@@ -20,7 +20,8 @@
             <h6 th:if="${condition}" class="form-control col-4 mb-4">No Account. Create some!</h6>
             <select th:unless="${condition}" th:field="*{account}" class="form-control col-4 mb-4">
                 <option value="" selected="selected">Select Account</option>
-                <option th:each="a : ${accounts}" th:value="${a.id}" th:text="${a.name + ' (' + a.balance + ')'}"/>
+                <option th:each="a : ${accounts}" th:value="${a.id}"
+                        th:text="${a.name + ' (' + #numbers.formatDecimal(a.balance, 0, 'COMMA', 0, 'POINT') + ')'}"/>
             </select>
         </div>
         <div th:with="condition=${categories.empty}">
