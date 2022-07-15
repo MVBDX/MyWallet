@@ -1,13 +1,13 @@
-package ir.mvbdx.mywallet.entity;
+package ir.mvbdx.mywallet.enumeration;
 
 public enum TransactionType {
-    EXPENSE("Expense"),
-    INCOME("Income"),
+    WITHDRAW("Withdraw"),
+    DEPOSIT("Deposit"),
     TRANSFER("Transfer");
 
     private final String displayValue;
 
-    private TransactionType(String displayValue) {
+    TransactionType(String displayValue) {
         this.displayValue = displayValue;
     }
 

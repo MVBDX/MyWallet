@@ -27,7 +27,7 @@
         <tr th:each="account: ${accounts}">
             <td th:text="${account.id}"/>
             <td th:text="${account.name}"/>
-            <td th:text="${account.type}"/>
+            <td th:text="${account.type.getDisplayValue()}"/>
             <td th:text="${account.number}"/>
             <td th:text="${#numbers.formatDecimal(account.balance, 0, 'COMMA', 0, 'POINT')}"/>
             <td>

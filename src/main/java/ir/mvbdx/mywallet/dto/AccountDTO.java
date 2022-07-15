@@ -1,6 +1,6 @@
 package ir.mvbdx.mywallet.dto;
 
-import ir.mvbdx.mywallet.entity.AccountType;
+import ir.mvbdx.mywallet.enumeration.AccountType;
 
 import lombok.Data;
 

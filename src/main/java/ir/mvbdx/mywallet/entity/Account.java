@@ -1,5 +1,6 @@
 package ir.mvbdx.mywallet.entity;
 
+import ir.mvbdx.mywallet.enumeration.AccountType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

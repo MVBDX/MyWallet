@@ -1,6 +1,6 @@
 package ir.mvbdx.mywallet.dto;
 
-import ir.mvbdx.mywallet.entity.TransactionType;
+import ir.mvbdx.mywallet.enumeration.TransactionType;
 import lombok.Data;
 
 import java.util.Date;
