@@ -14,4 +14,5 @@ public class CustomerDTO {
     private String email;
     private String phone;
     private Set<AccountDTO> accounts;
+    private Set<String> roles;
 }
