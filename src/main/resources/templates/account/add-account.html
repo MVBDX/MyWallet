@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<div class="container">
+<div class="container col-sm-4">
 
     <h3>Add New Account</h3>
     <hr/>
@@ -19,13 +19,14 @@
         <input type="text" th:field="*{number}" class="form-control col-4 mb-4" placeholder="Enter account number"/>
         <select th:field="*{type}" class="form-control col-4 mb-4">
             <option value="" selected="selected">Select Account Type</option>
-            <option th:each="t : ${types}" th:value="${t}" th:text="${t}"/>
+            <option th:each="t : ${T(ir.mvbdx.mywallet.enumeration.AccountType).values()}" th:value="${t}"
+                    th:text="${t.getDisplayValue()}"/>
         </select>
         <input type="text" th:field="*{balance}" class="form-control col-4 mb-4" placeholder="Enter account balance"/>
-        <button type="submit" class="btn btn-primary col-2">Save</button>
+        <button type="submit" class="btn btn-success">Save</button>
+        <a th:href="@{/account/list}" class="btn btn-warning">Cancel</a>
     </form>
     <hr/>
-    <a th:href="@{/account/list}">Back to list</a>
 </div>
 </body>
 </html>

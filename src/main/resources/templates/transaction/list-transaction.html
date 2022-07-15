@@ -16,7 +16,11 @@
     <table class="table table-striped table-hover table-sm table-bordered">
         <thead>
         <tr>
+            <th>Name</th>
             <th>Amount</th>
+            <th>Type</th>
+            <th>Account</th>
+            <th>Category</th>
             <th>Note</th>
             <th>Date</th>
             <th>Action</th>
@@ -24,8 +28,15 @@
         </thead>
         <tbody>
         <tr th:each="transaction: ${transactions}">
+            <td th:text="${transaction.name}"/>
             <td th:text="${#numbers.formatDecimal(transaction.amount, 0, 'COMMA', 0, 'POINT')}"/>
-            <td th:text="${transaction.note}"/>
+            <td>
+                <img th:src="${transaction.type == transaction.type.WITHDRAW ? '/images/withdraw.png' :
+                    (transaction.type == transaction.type.DEPOSIT ? '/images/deposit.png' : '/images/transfer.png')}"/>
+            </td>
+            <td th:text="${transaction.account.getName()}"/>
+            <td th:text="${transaction.getCategory().getName()}"/>
+            <td th:text="${transaction.note}" th:dir="rtl"/>
             <td th:text="${transaction.date}"/>
             <td>
                 <a th:href="@{edit/{id}(id=${transaction.id})}" class="btn btn-sm btn-primary">Update</a>
@@ -43,6 +54,8 @@
                 th:style="'color:black; background-color:red'"></td>
             <td th:text="'Balance: ' + ${#numbers.formatDecimal(totalBalance, 0, 'COMMA', 0, 'POINT')}"
                 th:style="'color:blue; background-color:deepskyblue'"></td>
+            <td th:text="'Stock: ' + ${#numbers.formatDecimal(totalAccountsBalance, 0, 'COMMA', 0, 'POINT')}"
+                th:style="'color:white; background-color:lightgreen'"></td>
         </tr>
         </tfoot>
     </table>
