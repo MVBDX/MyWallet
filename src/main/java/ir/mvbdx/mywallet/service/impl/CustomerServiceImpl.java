@@ -5,39 +5,40 @@ import ir.mvbdx.mywallet.entity.Customer;
 import ir.mvbdx.mywallet.entity.Role;
 import ir.mvbdx.mywallet.repository.CustomerRepository;
 import ir.mvbdx.mywallet.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
-import java.util.Collection;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Service
 public class CustomerServiceImpl implements UserService {
 
-    @Autowired
-    CustomerRepository customerRepository;
+    private final CustomerRepository customerRepository;
 
     public Customer findLoggedInUser(Principal principal) {
         return customerRepository.findByEmail(principal.getName());
     }
 
-    public Set<Account> getAllAccounts(Principal principal) {
-        return findLoggedInUser(principal).getAccounts();
+    public List<Account> getAllAccounts(Principal principal) {
+        List<Account> accounts = findLoggedInUser(principal).getAccounts(); //todo should order in repository
+        accounts.sort(Comparator.comparing(Account::getBalance, Comparator.reverseOrder()));
+        return accounts;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         var user = customerRepository.findByEmail(username);
-        if (user == null) {
+        if (user == null)
             throw new UsernameNotFoundException("Invalid username or password.");
-        }
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
+        return new User(user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
     }
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {

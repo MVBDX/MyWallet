@@ -3,9 +3,10 @@ package ir.mvbdx.mywallet.controller;
 import ir.mvbdx.mywallet.entity.Account;
 import ir.mvbdx.mywallet.entity.Category;
 import ir.mvbdx.mywallet.entity.Transaction;
-import ir.mvbdx.mywallet.entity.TransactionType;
+import ir.mvbdx.mywallet.enumeration.TransactionType;
 import ir.mvbdx.mywallet.service.impl.AccountServiceImpl;
 import ir.mvbdx.mywallet.service.impl.CategoryServiceImpl;
+import ir.mvbdx.mywallet.service.impl.CustomerServiceImpl;
 import ir.mvbdx.mywallet.service.impl.TransactionServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ui.Model;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,14 +25,15 @@ import java.util.stream.Stream;
 @RequiredArgsConstructor
 public class TransactionController {
 
-    private final TransactionServiceImpl service;
+    private final TransactionServiceImpl transactionService;
     private final CategoryServiceImpl categoryService;
     private final AccountServiceImpl accountService;
+    private final CustomerServiceImpl customerService;
 
     @GetMapping("/new")
-    public String newForm(Model model) {
+    public String newForm(Model model, Principal principal) {
         List<Category> categoryList = categoryService.findAll();
-        List<Account> accountList = accountService.findAll();
+        List<Account> accountList = customerService.getAllAccounts(principal);
         model.addAttribute("transactionForm", new Transaction());
         model.addAttribute("accounts", accountList);
         model.addAttribute("categories", categoryList);
@@ -43,24 +46,25 @@ public class TransactionController {
     }
 
     @GetMapping({"/list", "/"})
-    public ModelAndView listAll() {
+    public ModelAndView listAll(Principal principal) {
         ModelAndView mav = new ModelAndView("transaction/list-transaction");
-        mav.addObject("transactions", service.findAll());
-        mav.addObject("totalIncome", service.totalIncome());
-        mav.addObject("totalSpend", service.totalSpend());
-        mav.addObject("totalBalance", service.totalBalance());
+        mav.addObject("transactions", transactionService.findByOrderByDateDescIdDesc());
+        mav.addObject("totalIncome", transactionService.totalIncome());
+        mav.addObject("totalSpend", transactionService.totalSpend());
+        mav.addObject("totalBalance", transactionService.totalBalance());
+        mav.addObject("totalAccountsBalance", accountService.totalBalance(principal));
         return mav;
     }
 
     @PostMapping("/save")
     public String saveForm(@ModelAttribute("transactionForm") Transaction transaction) {
-        service.save(transaction);
+        transactionService.save(transaction);
         return "redirect:/transaction/list";
     }
 
     @PutMapping("/edit/save")
     public String update(@ModelAttribute("transactionForm") Transaction transaction) {
-        service.update(transaction.getId(), transaction);
+        transactionService.update(transaction.getId(), transaction);
         return "redirect:/transaction/list";
     }
 
@@ -68,7 +72,7 @@ public class TransactionController {
     public String editById(Model model, @PathVariable("id") Long id) {
         List<Category> categoryList = categoryService.findAll();
         List<Account> accountList = accountService.findAll();
-        model.addAttribute("transactionForm", service.findById(id));
+        model.addAttribute("transactionForm", transactionService.findById(id));
         model.addAttribute("accounts", accountList);
         model.addAttribute("categories", categoryList);
         model.addAttribute("currentDate", LocalDate.now());
@@ -82,7 +86,7 @@ public class TransactionController {
     @GetMapping("/delete/{id}")
 //    @ResponseStatus(HttpStatus.OK) : is for rest
     public String delete(@PathVariable("id") Long id) {
-        service.delete(id);
+        transactionService.delete(id);
         return "redirect:/transaction/list";
     }
 

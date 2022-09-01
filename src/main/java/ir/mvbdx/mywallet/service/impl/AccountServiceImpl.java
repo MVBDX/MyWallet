@@ -4,12 +4,14 @@ import ir.mvbdx.mywallet.entity.Account;
 import ir.mvbdx.mywallet.exception.EntityHaveRelationException;
 import ir.mvbdx.mywallet.exception.EntityNotFoundException;
 import ir.mvbdx.mywallet.repository.AccountRepository;
+import ir.mvbdx.mywallet.repository.CustomerRepository;
 import ir.mvbdx.mywallet.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.text.DecimalFormat;
 import java.util.Optional;
 
@@ -17,6 +19,8 @@ import java.util.Optional;
 public class AccountServiceImpl extends BaseServiceImpl<Account> {
     @Autowired
     private TransactionRepository transactionRepository;
+    @Autowired
+    private CustomerRepository customerRepository;
     private AccountRepository accountRepository;
 
     public AccountServiceImpl(@Qualifier("accountRepository") JpaRepository<Account, Long> baseRepository) {
@@ -34,8 +38,8 @@ public class AccountServiceImpl extends BaseServiceImpl<Account> {
         return transactionRepository.totalSpendOfAccount(account.get().getId());
     }
 
-    public Double totalBalance() {
-        return accountRepository.totalBalance();
+    public Double totalBalance(Principal principal) {
+        return accountRepository.totalBalance(customerRepository.findByEmail(principal.getName()));
     }
 
     @Override
