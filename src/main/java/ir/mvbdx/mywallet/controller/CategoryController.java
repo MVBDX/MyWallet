@@ -12,45 +12,45 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/category")
 @RequiredArgsConstructor
 public class CategoryController {
-    private final CategoryServiceImpl service;
+    private final CategoryServiceImpl categoryService;
 
     @GetMapping("/new")
     public String newForm(Model model) {
         model.addAttribute("categoryForm", new Category());
-        model.addAttribute("categories", service.findAll());
+        model.addAttribute("categories", categoryService.findAll());
         return "category/add-category";
     }
 
     @GetMapping({"/list"})
     public ModelAndView listAll() {
         ModelAndView mav = new ModelAndView("category/list-category");
-        mav.addObject("categories", service.findAll());
+        mav.addObject("categories", categoryService.findAll());
         return mav;
     }
 
     @PostMapping("/save")
     public String saveForm(@ModelAttribute("categoryForm") Category category) {
-        service.save(category);
+        categoryService.save(category);
         return "redirect:/category/list";
     }
 
     @PutMapping("/edit/save")
     public String update(@ModelAttribute("categoryForm") Category category) {
-        service.update(category.getId(), category);
+        categoryService.update(category.getId(), category);
         return "redirect:/category/list";
     }
 
     @GetMapping("/edit/{id}")
     public String editById(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("categoryForm", service.findById(id));
-        model.addAttribute("categories", service.findAll());
+        model.addAttribute("categoryForm", categoryService.findById(id));
+        model.addAttribute("categories", categoryService.findAll());
         return "category/add-category";
     }
 
     @GetMapping("/delete/{id}")
 //    @ResponseStatus(HttpStatus.OK) : is for rest
     public String delete(@PathVariable("id") Long id) {
-        service.delete(id);
+        categoryService.delete(id);
         return "redirect:/category/list";
     }
 
