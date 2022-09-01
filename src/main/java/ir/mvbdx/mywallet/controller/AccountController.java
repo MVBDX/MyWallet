@@ -1,13 +1,16 @@
 package ir.mvbdx.mywallet.controller;
 
 import ir.mvbdx.mywallet.entity.*;
+import ir.mvbdx.mywallet.enumeration.AccountType;
 import ir.mvbdx.mywallet.service.impl.AccountServiceImpl;
+import ir.mvbdx.mywallet.service.impl.CustomerServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -15,7 +18,8 @@ import java.util.stream.Stream;
 @RequestMapping("/account")
 @RequiredArgsConstructor
 public class AccountController {
-    private final AccountServiceImpl service;
+    private final AccountServiceImpl accountService;
+    private final CustomerServiceImpl customerService;
 
     @GetMapping("/new")
     public String newForm(Model model) {
@@ -28,28 +32,30 @@ public class AccountController {
     }
 
     @GetMapping({"/list", "/"})
-    public ModelAndView listAll() {
+    public ModelAndView listAll(Principal principal) {
         ModelAndView mav = new ModelAndView("account/list-account");
-        mav.addObject("accounts", service.findAll());
-        mav.addObject("totalBalance", service.totalBalance());
+        mav.addObject("accounts", customerService.getAllAccounts(principal));
+        mav.addObject("totalBalance", accountService.totalBalance(principal));
         return mav;
     }
 
     @PostMapping("/save")
-    public String saveForm(@ModelAttribute("accountForm") Account account) {
-        service.save(account);
+    public String saveForm(@ModelAttribute("accountForm") Account account, Principal principal) {
+        account.setCustomer(customerService.findLoggedInUser(principal));
+        accountService.save(account);
         return "redirect:/account/list";
     }
 
     @PutMapping("/edit/save")
-    public String update(@ModelAttribute("accountForm") Account account) {
-        service.update(account.getId(), account);
+    public String update(@ModelAttribute("accountForm") Account account, Principal principal) {
+        account.setCustomer(customerService.findLoggedInUser(principal));
+        accountService.update(account.getId(), account);
         return "redirect:/account/list";
     }
 
     @GetMapping("/edit/{id}")
     public String editById(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("accountForm", service.findById(id));
+        model.addAttribute("accountForm", accountService.findById(id));
         model.addAttribute("types",
                 Stream.of(AccountType.values())
                         .map(Enum::name)
@@ -60,7 +66,7 @@ public class AccountController {
     @GetMapping("/delete/{id}")
 //    @ResponseStatus(HttpStatus.OK) : is for rest
     public String delete(@PathVariable("id") Long id) {
-        service.delete(id);
+        accountService.delete(id);
         return "redirect:/account/list";
     }
 
