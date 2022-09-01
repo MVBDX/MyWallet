@@ -9,7 +9,7 @@ import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @SQLDelete(sql = "UPDATE customer SET deleted = true WHERE id = ?")
@@ -30,7 +30,7 @@ public class Customer {
     private String email;
     private String phone;
     @OneToMany(mappedBy = "customer", cascade = CascadeType.PERSIST)
-    private Set<Account> accounts;
+    private List<Account> accounts;
     private boolean deleted = Boolean.FALSE;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
