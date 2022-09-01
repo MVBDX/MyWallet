@@ -2,14 +2,20 @@ package ir.mvbdx.mywallet.service.impl;
 
 import ir.mvbdx.mywallet.entity.Account;
 import ir.mvbdx.mywallet.entity.Transaction;
-import ir.mvbdx.mywallet.entity.TransactionType;
+import ir.mvbdx.mywallet.enumeration.TransactionType;
+import ir.mvbdx.mywallet.repository.AccountRepository;
 import ir.mvbdx.mywallet.repository.TransactionRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TransactionServiceImpl extends BaseServiceImpl<Transaction> {
+    @Autowired
+    private AccountRepository accountRepository;
     private TransactionRepository transactionRepository;
 
     public TransactionServiceImpl(@Qualifier("transactionRepository") JpaRepository<Transaction, Long> baseRepository) {
@@ -20,12 +26,26 @@ public class TransactionServiceImpl extends BaseServiceImpl<Transaction> {
     @Override
     public Transaction save(Transaction base) {
         Account account = base.getAccount();
-        if (base.getType().equals(TransactionType.EXPENSE))
-            account.setBalance(account.getBalance() - base.getAmount());
-        else if (base.getType().equals(TransactionType.INCOME))
-            account.setBalance(account.getBalance() + base.getAmount());
-        // todo implement transfer between two account
+        if (base.getType().equals(TransactionType.WITHDRAW))
+            account.withdraw(base.getAmount());
+        else if (base.getType().equals(TransactionType.DEPOSIT))
+            account.deposit(base.getAmount());
+        else if (base.getType().equals(TransactionType.TRANSFER)) {
+            Account transferAccount = accountRepository.findById(base.getCategory().getId()).get();
+            Transaction transferTransaction = new Transaction(null, TransactionType.DEPOSIT, base.getAmount(),
+                    transferAccount, base.getCategory(), base.getAccount().getName(), null, base.getDate(),
+                    null, null, false);
+            account.withdraw(base.getAmount());
+            transferAccount.deposit(base.getAmount());
+            base.setType(TransactionType.WITHDRAW);
+            super.save(transferTransaction);
+        }
         return super.save(base);
+    }
+
+    @Override
+    public Transaction update(Long id, Transaction base) {
+        return super.update(id, base);
     }
 
     public Double totalIncome() {
@@ -44,5 +64,9 @@ public class TransactionServiceImpl extends BaseServiceImpl<Transaction> {
         } catch (Exception e) {
             return 0D;
         }
+    }
+
+    public List<Transaction> findByOrderByDateDescIdDesc() {
+        return transactionRepository.findByOrderByDateDescIdDesc();
     }
 }
