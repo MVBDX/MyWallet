@@ -30,12 +30,12 @@
         <tr th:each="transaction: ${transactions}">
             <td th:text="${transaction.name}"/>
             <td th:text="${#numbers.formatDecimal(transaction.amount, 0, 'COMMA', 0, 'POINT')}"/>
-            <td>
+            <td th:width="5px">
                 <img th:src="${transaction.type == transaction.type.WITHDRAW ? '/images/withdraw.png' :
                     (transaction.type == transaction.type.DEPOSIT ? '/images/deposit.png' : '/images/transfer.png')}"/>
             </td>
-            <td th:text="${transaction.account.getName()}"/>
-            <td th:text="${transaction.getCategory().getName()}"/>
+            <td th:width="5px" th:text="${transaction.account.getName()}"/>
+            <td th:width="5px" th:text="${transaction.category.getName()}"/>
             <td th:text="${transaction.note}" th:dir="rtl"/>
             <td th:text="${transaction.date}"/>
             <td>
