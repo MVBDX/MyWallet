@@ -9,6 +9,6 @@ import org.springframework.stereotype.Controller;
 @RequestMapping("/customer")
 @RequiredArgsConstructor
 public class CustomerController {
-    private final CustomerServiceImpl service;
+    private final CustomerServiceImpl customerService;
 
 }
