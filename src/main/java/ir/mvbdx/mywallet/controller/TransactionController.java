@@ -48,7 +48,7 @@ public class TransactionController {
     @GetMapping({"/list", "/"})
     public ModelAndView listAll(Principal principal) {
         ModelAndView mav = new ModelAndView("transaction/list-transaction");
-        mav.addObject("transactions", transactionService.findByOrderByDateDescIdDesc());
+        mav.addObject("transactions", transactionService.findAllByCustomerOrderByDate(principal));
         mav.addObject("totalIncome", transactionService.totalIncome());
         mav.addObject("totalSpend", transactionService.totalSpend());
         mav.addObject("totalBalance", transactionService.totalBalance());

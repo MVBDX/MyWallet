@@ -15,8 +15,8 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@SQLDelete(sql = "UPDATE transaction SET deleted = true WHERE id=?")
-@Where(clause = "deleted=false")
+@SQLDelete(sql = "UPDATE transaction SET deleted = true WHERE id = ?")
+@Where(clause = "deleted = false")
 @Getter
 @Setter
 @NoArgsConstructor

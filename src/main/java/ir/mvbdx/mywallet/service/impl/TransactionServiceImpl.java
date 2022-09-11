@@ -4,18 +4,22 @@ import ir.mvbdx.mywallet.entity.Account;
 import ir.mvbdx.mywallet.entity.Transaction;
 import ir.mvbdx.mywallet.enumeration.TransactionType;
 import ir.mvbdx.mywallet.repository.AccountRepository;
+import ir.mvbdx.mywallet.repository.CustomerRepository;
 import ir.mvbdx.mywallet.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.List;
 
 @Service
 public class TransactionServiceImpl extends BaseServiceImpl<Transaction> {
     @Autowired
     private AccountRepository accountRepository;
+    @Autowired
+    private CustomerRepository customerRepository;
     private TransactionRepository transactionRepository;
 
     public TransactionServiceImpl(@Qualifier("transactionRepository") JpaRepository<Transaction, Long> baseRepository) {
@@ -66,7 +70,7 @@ public class TransactionServiceImpl extends BaseServiceImpl<Transaction> {
         }
     }
 
-    public List<Transaction> findByOrderByDateDescIdDesc() {
-        return transactionRepository.findByOrderByDateDescIdDesc();
+    public List<Transaction> findAllByCustomerOrderByDate(Principal principal) {
+        return transactionRepository.findAllByCustomer(customerRepository.findByEmail(principal.getName()));
     }
 }
