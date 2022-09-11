@@ -14,19 +14,19 @@
     <table class="table table-striped table-hover table-sm table-bordered">
         <thead>
         <tr>
-            <th>ID</th>
+            <th th:width="30px">ID</th>
             <th>Name</th>
-            <th>Type</th>
+            <th th:width="110px" th:class="text-center">Type</th>
             <th>Number</th>
             <th>Balance</th>
-            <th>Action</th>
+            <th th:width="125px" th:class="text-center">Action</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="account: ${accounts}">
+        <tr style="vertical-align: middle" th:each="account: ${accounts}">
             <td th:text="${account.id}"/>
             <td th:text="${account.name}"/>
-            <td th:text="${account.type.getDisplayValue()}"/>
+            <td th:class="text-center" th:text="${account.type.getDisplayValue()}"/>
             <td th:text="${account.number}"/>
             <td th:text="${#numbers.formatDecimal(account.balance, 0, 'COMMA', 0, 'POINT')}"/>
             <td>

@@ -11,16 +11,16 @@
     <hr/>
     <a th:href="@{new}" class="btn btn-primary">Add Category</a>
     <br/><br/>
-    <table class="table table-striped table-hover table-sm table-bordered">
+    <table class="table table-responsive table-striped table-hover table-sm table-bordered">
         <thead>
         <tr>
-            <th>ID</th>
+            <th th:width="40px">ID</th>
             <th>Name</th>
-            <th>Action</th>
+            <th th:width="125px" class="text-center">Action</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="category: ${categories}">
+        <tr style="vertical-align: middle" th:each="category: ${categories}">
             <td th:text="${category.id}"/>
             <td th:text="${category.name}"/>
             <td>

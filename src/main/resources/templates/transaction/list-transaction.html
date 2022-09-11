@@ -17,19 +17,19 @@
         <tr>
             <th>Name</th>
             <th>Amount</th>
-            <th>Type</th>
+            <th th:width="40px" th:class="text-center">Type</th>
             <th>Account</th>
             <th>Category</th>
             <th>Note</th>
-            <th>Date</th>
-            <th>Action</th>
+            <th th:width="80px" th:class="text-center">Date</th>
+            <th th:width="125px" th:class="text-center">Action</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="transaction: ${transactions}">
+        <tr style="vertical-align: middle" th:each="transaction: ${transactions}">
             <td th:text="${transaction.name}"/>
             <td th:text="${#numbers.formatDecimal(transaction.amount, 0, 'COMMA', 0, 'POINT')}"/>
-            <td th:width="5px">
+            <td th:class="text-center">
                 <img th:src="${transaction.type == transaction.type.WITHDRAW ? '/images/withdraw.png' :
                     (transaction.type == transaction.type.DEPOSIT ? '/images/deposit.png' : '/images/transfer.png')}"/>
             </td>
