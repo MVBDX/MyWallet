@@ -1,14 +1,18 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8"/>
     <title>MyWallet</title>
+    <title th:text="#{label.pages.home.title}"/>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
+    <script th:src="@{/scripts/jquery.min.js}"></script>
+    <script th:src="@{/scripts/internationalization.js}"></script>
 </head>
 <body>
 <div class="container">
-    <h3>Welcome to MyWallet!</h3>
-    <a th:href="@{/account/list}" class="btn btn-primary">Accounts</a>
-    <a th:href="@{/category/list}" class="btn btn-primary">Categories</a>
-    <a th:href="@{/transaction/list}" class="btn btn-primary">Transactions</a>
+    <h3 th:text="#{label.pages.home.title}"/>
+    <a th:href="@{/account/list}" class="btn btn-primary" th:text="#{label.pages.accounts}"/>
+    <a th:href="@{/category/list}" class="btn btn-primary" th:text="#{label.pages.categories}"/>
+    <a th:href="@{/transaction/list}" class="btn btn-primary" th:text="#{label.pages.transactions}"/>
 </div>
 </body>
 </html>

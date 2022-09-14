@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>ورود</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
+    <script th:src="@{/scripts/jquery.min.js}"></script>
+    <script th:src="@{/scripts/internationalization.js}"></script>
+</head>
+<body class="text-center row p-5 justify-content-center align-content-center" style="font-family: 'B Mitra'">
+
+<div class="bg-white rounded p-1 w-25 text-center">
+    <div class="rounded p-2 w-auto">
+
+        <h2 th:text="#{greeting}"/>
+
+        <span th:text="#{lang.change}"></span>:
+        <select id="locales">
+            <option value=""></option>
+            <option value="en" th:text="#{lang.eng}"></option>
+            <option value="fa" th:text="#{lang.fa}"></option>
+        </select>
+        <br/><br/>
+
+        <div class="border border-light rounded">
+            <form action="#" th:action="@{/login}" method="post">
+                <p><input class="text-center rounded w-50" type="text" name="username" th:placeholder="#{label.pages.home.username}"/></p>
+                <p><input class="text-center rounded w-50" type="password" name="password" th:placeholder="#{label.pages.home.password}"/></p>
+                <p th:if="${param.error}" class="text-danger" th:text="#{label.pages.error.register}"/>
+                <p><input class="btn btn-dark w-50" type="submit" th:value="#{label.pages.enter}"/></p>
+            </form>
+        </div>
+        <div class="row text-center justify-content-center">
+            <form class="m-2" th:action="@{/register}">
+                <input class="btn btn-dark" type="submit" th:value="#{label.pages.register}">
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

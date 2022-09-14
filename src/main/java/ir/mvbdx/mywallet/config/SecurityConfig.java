@@ -39,6 +39,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     protected void configure(HttpSecurity http) throws Exception {
 
+        String[] staticResources = {"/css/**", "/images/**", "/fonts/**", "/scripts/**"};
+
         http
                 .sessionManagement()
                 .maximumSessions(1)
@@ -50,11 +52,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidSessionUrl("/invalid")
                 .and()
 
-                .httpBasic()
-                .and()
-
                 .authorizeRequests()
+                .antMatchers(staticResources).permitAll()
                 .antMatchers("/welcome").permitAll()
+                .antMatchers("/login").permitAll()
+                .antMatchers("/register").permitAll()
                 .and()
 
                 .authorizeRequests()
@@ -66,7 +68,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
 
-                .formLogin().permitAll()
+                .formLogin().loginPage("/login").permitAll()
                 .defaultSuccessUrl("/index", true)
                 .and()
 
