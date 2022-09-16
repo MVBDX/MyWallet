@@ -26,7 +26,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr style="vertical-align: middle" th:each="transaction: ${transactions}">
+        <tr style="vertical-align: middle" th:each="transaction: ${transactions.page}">
             <td th:text="${transaction.name}"/>
             <td th:text="${#numbers.formatDecimal(transaction.amount, 0, 'COMMA', 0, 'POINT')}"/>
             <td th:class="text-center">
@@ -58,7 +58,30 @@
         </tr>
         </tfoot>
     </table>
-    <a href="/">Back to Home</a>
+
+    <nav aria-label="Page navigation" class="paging">
+        <ul class="pagination" th:if="${transactions.page.totalPages > 1}">
+            <a th:href="@{new}" class="btn btn-primary" th:text="#{label.pages.transaction.add}"/>
+
+            <li class="page-item" th:classappend="${!transactions.paging.isPrevEnabled()? 'disabled' : ''}">
+                <a class="page-link" th:href="@{'/transaction/list?pageNumber=' + ${transactions.paging.pageNumber - 1}}"
+                   tabindex="-1">Previous</a>
+            </li>
+            <th:block th:each="item : ${transactions.paging.getItems()}">
+                <li class="page-item" th:classappend="${item.index == transactions.paging.pageNumber? 'active' : ''}"
+                    th:if="${item.pageItemType.name() == 'PAGE'}">
+                    <a class="page-link" th:href="@{'/transaction/list?pageNumber=' + ${item.index}}"
+                       th:text="${item.index}"></a>
+                </li>
+                <li class="page-item disabled" th:if="${item.pageItemType.name() == 'DOTS'}">
+                    <a class="page-link" href="#">...</a>
+                </li>
+            </th:block>
+            <li class="page-item" th:classappend="${!transactions.paging.isNextEnabled()? 'disabled' : ''}">
+                <a class="page-link" th:href="@{'/transaction/list?pageNumber=' + ${transactions.paging.pageNumber + 1}}">Next</a>
+            </li>
+        </ul>
+    </nav>
 </div>
 </body>
 </html>

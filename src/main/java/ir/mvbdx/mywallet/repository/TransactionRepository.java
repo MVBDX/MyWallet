@@ -2,6 +2,8 @@ package ir.mvbdx.mywallet.repository;
 
 import ir.mvbdx.mywallet.entity.Customer;
 import ir.mvbdx.mywallet.entity.Transaction;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -25,6 +27,6 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     Double totalSpend();
 
     @Query("SELECT t FROM Transaction t, Account a WHERE t.account = a AND a.customer = :customer ORDER BY t.date DESC, t.id DESC")
-    List<Transaction> findAllByCustomer(@Param("customer") Customer customer);
+    Page<Transaction> findAllByCustomer(@Param("customer") Customer customer, Pageable pageable);
 
 }

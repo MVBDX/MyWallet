@@ -2,17 +2,20 @@ package ir.mvbdx.mywallet.service.impl;
 
 import ir.mvbdx.mywallet.entity.Account;
 import ir.mvbdx.mywallet.entity.Transaction;
+import ir.mvbdx.mywallet.entity.paging.Paged;
+import ir.mvbdx.mywallet.entity.paging.Paging;
 import ir.mvbdx.mywallet.enumeration.TransactionType;
 import ir.mvbdx.mywallet.repository.AccountRepository;
 import ir.mvbdx.mywallet.repository.CustomerRepository;
 import ir.mvbdx.mywallet.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
-import java.util.List;
 
 @Service
 public class TransactionServiceImpl extends BaseServiceImpl<Transaction> {
@@ -70,7 +73,9 @@ public class TransactionServiceImpl extends BaseServiceImpl<Transaction> {
         }
     }
 
-    public List<Transaction> findAllByCustomerOrderByDate(Principal principal) {
-        return transactionRepository.findAllByCustomer(customerRepository.findByEmail(principal.getName()));
+    public Paged<Transaction> findAllByCustomerOrderByDate(int pageNumber, int pageSize, Principal principal) {
+        PageRequest request = PageRequest.of(pageNumber - 1, pageSize);
+        Page<Transaction> transactionPage = transactionRepository.findAllByCustomer(customerRepository.findByEmail(principal.getName()), request);
+        return new Paged<>(transactionPage, Paging.of(transactionPage.getTotalPages(), pageNumber, pageSize));
     }
 }

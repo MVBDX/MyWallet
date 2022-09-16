@@ -46,9 +46,10 @@ public class TransactionController {
     }
 
     @GetMapping({"/list", "/"})
-    public ModelAndView listAll(Principal principal) {
+    public ModelAndView listAll(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") int pageNumber,
+                                @RequestParam(value = "pageSize", required = false, defaultValue = "15") int pageSize, Principal principal) {
         ModelAndView mav = new ModelAndView("transaction/list-transaction");
-        mav.addObject("transactions", transactionService.findAllByCustomerOrderByDate(principal));
+        mav.addObject("transactions", transactionService.findAllByCustomerOrderByDate(pageNumber, pageSize, principal));
         mav.addObject("totalIncome", transactionService.totalIncome());
         mav.addObject("totalSpend", transactionService.totalSpend());
         mav.addObject("totalBalance", transactionService.totalBalance());
