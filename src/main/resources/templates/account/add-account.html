@@ -1,4 +1,4 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="index">
 
 <head>
     <title>Add Account</title>
@@ -7,25 +7,26 @@
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
-
-<div class="container col-sm-4">
-
-    <h3>Add New Account</h3>
-    <hr/>
-    <form action="#" th:action="@{save}" th:object="${accountForm}" th:method="${id == null} ? 'POST' : 'PUT'">
-        <input type="text" th:field="*{id}" th:readonly="true" class="form-control col-4 mb-4"/>
-        <input type="text" th:field="*{name}" class="form-control col-4 mb-4" placeholder="Enter account name"/>
-        <input type="text" th:field="*{number}" class="form-control col-4 mb-4" placeholder="Enter account number"/>
-        <select th:field="*{type}" class="form-control col-4 mb-4">
-            <option value="" selected="selected">Select Account Type</option>
-            <option th:each="t : ${T(ir.mvbdx.mywallet.enumeration.AccountType).values()}" th:value="${t}"
-                    th:text="${t.getDisplayValue()}"/>
-        </select>
-        <input type="text" th:field="*{balance}" class="form-control col-4 mb-4" placeholder="Enter account balance"/>
-        <button type="submit" class="btn btn-success">Save</button>
-        <a th:href="@{/account/list}" class="btn btn-warning">Cancel</a>
-    </form>
-    <hr/>
+<div layout:fragment="content">
+    <div class="container col-sm-4">
+        <h3>Add New Account</h3>
+        <hr/>
+        <form action="#" th:action="@{save}" th:object="${accountForm}" th:method="${id == null} ? 'POST' : 'PUT'">
+            <input type="text" th:field="*{id}" th:readonly="true" class="form-control col-4 mb-4"/>
+            <input type="text" th:field="*{name}" class="form-control col-4 mb-4" placeholder="Enter account name"/>
+            <input type="text" th:field="*{number}" class="form-control col-4 mb-4" placeholder="Enter account number"/>
+            <select th:field="*{type}" class="form-control col-4 mb-4">
+                <option value="" selected="selected">Select Account Type</option>
+                <option th:each="t : ${T(ir.mvbdx.mywallet.enumeration.AccountType).values()}" th:value="${t}"
+                        th:text="${t.getDisplayValue()}"/>
+            </select>
+            <input type="text" th:field="*{balance}" class="form-control col-4 mb-4"
+                   placeholder="Enter account balance"/>
+            <button type="submit" class="btn btn-success">Save</button>
+            <a th:href="@{/account/list}" class="btn btn-warning">Cancel</a>
+        </form>
+        <hr/>
+    </div>
 </div>
 </body>
 </html>

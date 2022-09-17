@@ -1,4 +1,4 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="index">
 <head>
     <title>List Transactions</title>
     <meta charset="utf-8">
@@ -6,23 +6,20 @@
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
+<div layout:fragment="content">
 <div class="container">
-    <h3>List Transactions</h3>
-    <hr/>
-    <a th:href="@{new}" class="btn btn-primary">Add Transaction</a>
-    <a th:href="@{/}" class="btn btn-primary">Back to Home</a>
-    <br/><br/>
+<!--    <h3 th:text="#{label.pages.transaction.title}"/>-->
     <table class="table table-striped table-hover table-sm table-bordered">
         <thead>
         <tr>
-            <th>Name</th>
-            <th>Amount</th>
-            <th th:width="40px" th:class="text-center">Type</th>
-            <th>Account</th>
-            <th>Category</th>
-            <th>Note</th>
-            <th th:width="80px" th:class="text-center">Date</th>
-            <th th:width="125px" th:class="text-center">Action</th>
+            <th th:text="#{label.pages.transaction.name}"/>
+            <th th:text="#{label.pages.transaction.amount}"/>
+            <th th:width="40px" th:class="text-center" th:text="#{label.pages.transaction.type}"/>
+            <th th:text="#{label.pages.transaction.account}"/>
+            <th th:text="#{label.pages.transaction.category}"/>
+            <th th:text="#{label.pages.transaction.note}"/>
+            <th th:width="92px" th:class="text-center" th:text="#{label.pages.transaction.date}"/>
+            <th th:width="135px" th:class="text-center" th:text="#{label.pages.action}"/>
         </tr>
         </thead>
         <tbody>
@@ -36,24 +33,26 @@
             <td th:width="5px" th:text="${transaction.account.getName()}"/>
             <td th:width="5px" th:text="${transaction.category.getName()}"/>
             <td th:text="${transaction.note}" th:dir="rtl"/>
-            <td th:text="${transaction.date}"/>
-            <td>
-                <a th:href="@{edit/{id}(id=${transaction.id})}" class="btn btn-sm btn-primary">Update</a>
+            <td th:class="text-center" th:text="${transaction.date}"/>
+            <td th:class="text-center">
+                <a th:href="@{edit/{id}(id=${transaction.id})}" class="btn btn-sm btn-primary"
+                   th:text="#{label.pages.action.update}"/>
                 <a th:href="@{'delete/{id}'(id=${transaction.id})}" class="btn btn-sm btn-danger"
-                   onClick="return confirm('Are you sure to delete this account?')">Delete</a>
+                   onClick="return confirm('Are you sure to delete this transaction?')"
+                   th:text="#{label.pages.action.delete}"/>
             </td>
         </tr>
         </tbody>
         <tfoot>
         <tr>
-            <td style="background-color: black; color: yellow">Total</td>
-            <td th:text="'Income: ' + ${#numbers.formatDecimal(totalIncome, 0, 'COMMA', 0, 'POINT')}"
+            <td style="background-color: black; color: yellow" th:text="#{label.pages.transaction.footer.total}"/>
+            <td th:text="#{label.pages.transaction.footer.income} + ': ' + ${#numbers.formatDecimal(totalIncome, 0, 'COMMA', 0, 'POINT')}"
                 th:style="'color:white; background-color:green'"></td>
-            <td th:text="'Spend: ' + ${#numbers.formatDecimal(totalSpend, 0, 'COMMA', 0, 'POINT')}"
+            <td th:text="#{label.pages.transaction.footer.spend} + ': ' + ${#numbers.formatDecimal(totalSpend, 0, 'COMMA', 0, 'POINT')}"
                 th:style="'color:black; background-color:red'"></td>
-            <td th:text="'Balance: ' + ${#numbers.formatDecimal(totalBalance, 0, 'COMMA', 0, 'POINT')}"
+            <td th:text="#{label.pages.transaction.footer.balance} + ': ' + ${#numbers.formatDecimal(totalBalance, 0, 'COMMA', 0, 'POINT')}"
                 th:style="'color:blue; background-color:deepskyblue'"></td>
-            <td th:text="'Stock: ' + ${#numbers.formatDecimal(totalAccountsBalance, 0, 'COMMA', 0, 'POINT')}"
+            <td th:text="#{label.pages.transaction.footer.stock} + ': ' + ${#numbers.formatDecimal(totalAccountsBalance, 0, 'COMMA', 0, 'POINT')}"
                 th:style="'color:white; background-color:lightgreen'"></td>
         </tr>
         </tfoot>
@@ -82,6 +81,7 @@
             </li>
         </ul>
     </nav>
+</div>
 </div>
 </body>
 </html>

@@ -1,4 +1,4 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="index">
 <head>
     <title>List Accounts</title>
     <meta charset="utf-8">
@@ -6,47 +6,48 @@
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
-<div class="container">
-    <h3>List of Accounts</h3>
-    <hr/>
-    <a th:href="@{new}" class="btn btn-primary">Add Account</a>
-    <br/><br/>
-    <table class="table table-striped table-hover table-sm table-bordered">
-        <thead>
-        <tr>
-            <th th:width="30px">ID</th>
-            <th>Name</th>
-            <th th:width="110px" th:class="text-center">Type</th>
-            <th>Number</th>
-            <th>Balance</th>
-            <th th:width="125px" th:class="text-center">Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr style="vertical-align: middle" th:each="account: ${accounts}">
-            <td th:text="${account.id}"/>
-            <td th:text="${account.name}"/>
-            <td th:class="text-center" th:text="${account.type.getDisplayValue()}"/>
-            <td th:text="${account.number}"/>
-            <td th:text="${#numbers.formatDecimal(account.balance, 0, 'COMMA', 0, 'POINT')}"/>
-            <td>
-                <a th:href="@{edit/{id}(id=${account.id})}" class="btn btn-sm btn-primary">Update</a>
-                <a th:href="@{'delete/{id}'(id=${account.id})}" class="btn btn-sm btn-danger"
-                   onClick="return confirm('Are you sure to delete this account?')">Delete</a>
-            </td>
-        </tr>
-        </tbody>
-        <tfoot>
-        <tr>
-            <td></td>
-            <td style="background-color: black; color: yellow">Total</td>
-            <td th:text="${#numbers.formatDecimal(totalBalance, 0, 'COMMA', 0, 'POINT')}"
-                th:style="'color:white; background-color:green'"></td>
-        </tr>
-        </tfoot>
-    </table>
+<div layout:fragment="content">
+    <div class="container">
+        <h3>List of Accounts</h3>
+        <hr/>
+        <a th:href="@{new}" class="btn btn-primary">Add Account</a>
+        <br/><br/>
+        <table class="table table-striped table-hover table-sm table-bordered">
+            <thead>
+            <tr>
+                <th th:width="30px">ID</th>
+                <th>Name</th>
+                <th th:width="110px" th:class="text-center">Type</th>
+                <th>Number</th>
+                <th>Balance</th>
+                <th th:width="125px" th:class="text-center">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr style="vertical-align: middle" th:each="account: ${accounts}">
+                <td th:text="${account.id}"/>
+                <td th:text="${account.name}"/>
+                <td th:class="text-center" th:text="${account.type.getDisplayValue()}"/>
+                <td th:text="${account.number}"/>
+                <td th:text="${#numbers.formatDecimal(account.balance, 0, 'COMMA', 0, 'POINT')}"/>
+                <td>
+                    <a th:href="@{edit/{id}(id=${account.id})}" class="btn btn-sm btn-primary">Update</a>
+                    <a th:href="@{'delete/{id}'(id=${account.id})}" class="btn btn-sm btn-danger"
+                       onClick="return confirm('Are you sure to delete this account?')">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td></td>
+                <td style="background-color: black; color: yellow">Total</td>
+                <td th:text="${#numbers.formatDecimal(totalBalance, 0, 'COMMA', 0, 'POINT')}"
+                    th:style="'color:white; background-color:green'"></td>
+            </tr>
+            </tfoot>
+        </table>
 
-    <a href="/">Back to Home</a>
+    </div>
 </div>
 </body>
 </html>

@@ -1,4 +1,4 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="index">
 <head>
     <title>Add Transaction</title>
     <meta charset="utf-8">
@@ -6,23 +6,25 @@
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
-<div class="container">
-    <h3>Add New Category</h3>
-    <hr/>
-    <form action="#" th:action="@{save}" th:object="${categoryForm}" th:method="${id == null} ? 'POST' : 'PUT'">
-        <input type="text" th:field="*{id}" th:readonly="true" class="form-control col-4 mb-4"/>
-        <div th:with="condition=${categories.empty}">
-            <h6 th:if="${condition}" class="form-control col-4 mb-4">No Category.</h6>
-            <select th:unless="${condition}" th:field="*{parentCategory}" class="form-control col-4 mb-4">
-                <option value="" selected="selected">Select Parent Category</option>
-                <option th:each="c : ${categories}" th:value="${c.id}" th:text="${c.name}"/>
-            </select>
-        </div>
-        <input type="text" th:field="*{name}" class="form-control col-4 mb-4" placeholder="Enter category name"/>
-        <button type="submit" class="btn btn-primary col-2">Save</button>
-    </form>
-    <hr/>
-    <a th:href="@{/category/list}">Back to list</a>
+<div layout:fragment="content">
+    <div class="container col-sm-4">
+        <h3>Add New Category</h3>
+        <hr/>
+        <form action="#" th:action="@{save}" th:object="${categoryForm}" th:method="${id == null} ? 'POST' : 'PUT'">
+            <input type="text" th:field="*{id}" th:readonly="true" class="form-control col-4 mb-4"/>
+            <div th:with="condition=${categories.empty}">
+                <h6 th:if="${condition}" class="form-control col-4 mb-4">No Category.</h6>
+                <select th:unless="${condition}" th:field="*{parentCategory}" class="form-control col-4 mb-4">
+                    <option value="" selected="selected">Select Parent Category</option>
+                    <option th:each="c : ${categories}" th:value="${c.id}" th:text="${c.name}"/>
+                </select>
+            </div>
+            <input type="text" th:field="*{name}" class="form-control col-4 mb-4" placeholder="Enter category name"/>
+            <button type="submit" class="btn btn-success">Save</button>
+            <a th:href="@{/category/list}" class="btn btn-warning">Cancel</a>
+        </form>
+        <hr/>
+    </div>
 </div>
 </body>
 </html>

@@ -1,4 +1,4 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="index">
 <head>
     <title>List Categories</title>
     <meta charset="utf-8">
@@ -6,32 +6,33 @@
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
-<div class="container">
-    <h3>List of Categories</h3>
-    <hr/>
-    <a th:href="@{new}" class="btn btn-primary">Add Category</a>
-    <br/><br/>
-    <table class="table table-responsive table-striped table-hover table-sm table-bordered">
-        <thead>
-        <tr>
-            <th th:width="40px">ID</th>
-            <th>Name</th>
-            <th th:width="125px" class="text-center">Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr style="vertical-align: middle" th:each="category: ${categories}">
-            <td th:text="${category.id}"/>
-            <td th:text="${category.name}"/>
-            <td>
-                <a th:href="@{edit/{id}(id=${category.id})}" class="btn btn-sm btn-primary">Update</a>
-                <a th:href="@{'delete/{id}'(id=${category.id})}" class="btn btn-sm btn-danger"
-                   onClick="return confirm('Are you sure to delete this account?')">Delete</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <a href="/">Back to Home</a>
+<div layout:fragment="content">
+    <div class="container">
+        <h3>List of Categories</h3>
+        <hr/>
+        <a th:href="@{new}" class="btn btn-primary">Add Category</a>
+        <br/><br/>
+        <table class="table table-responsive table-striped table-hover table-sm table-bordered">
+            <thead>
+            <tr>
+                <th th:width="40px">ID</th>
+                <th>Name</th>
+                <th th:width="125px" class="text-center">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr style="vertical-align: middle" th:each="category: ${categories}">
+                <td th:text="${category.id}"/>
+                <td th:text="${category.name}"/>
+                <td>
+                    <a th:href="@{edit/{id}(id=${category.id})}" class="btn btn-sm btn-primary">Update</a>
+                    <a th:href="@{'delete/{id}'(id=${category.id})}" class="btn btn-sm btn-danger"
+                       onClick="return confirm('Are you sure to delete this category?')">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 </body>
 </html>

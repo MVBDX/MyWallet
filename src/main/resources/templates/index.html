@@ -1,4 +1,4 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8"/>
     <title>MyWallet</title>
@@ -8,11 +8,28 @@
     <script th:src="@{/scripts/internationalization.js}"></script>
 </head>
 <body>
-<div class="container">
-    <h3 th:text="#{label.pages.home.title}"/>
-    <a th:href="@{/account/list}" class="btn btn-primary" th:text="#{label.pages.accounts}"/>
-    <a th:href="@{/category/list}" class="btn btn-primary" th:text="#{label.pages.categories}"/>
-    <a th:href="@{/transaction/list}" class="btn btn-primary" th:text="#{label.pages.transactions}"/>
+<nav class="navbar navbar-expand-md navbar-dark bg-primary">
+    <a class="navbar-brand" th:href="@{/}" th:text="#{application.name}"/>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar"
+            aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbar">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a th:text="#{label.pages.accounts}" class="nav-link" th:href="@{/account/list}"/>
+            </li>
+            <li class="nav-item">
+                <a th:text="#{label.pages.categories}" class="nav-link" th:href="@{/category/list}"/>
+            </li>
+            <li class="nav-item">
+                <a th:text="#{label.pages.transactions}" class="nav-link" th:href="@{/transaction/list}"/>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div layout:fragment="content">
+    <p></p>
 </div>
 </body>
 </html>

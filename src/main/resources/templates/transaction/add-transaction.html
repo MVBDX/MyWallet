@@ -1,43 +1,58 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="index">
 <head>
     <title>Add Transaction</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
+    <script th:src="@{/scripts/jquery.min.js}"></script>
+    <script th:src="@{/scripts/jquery.inputmask.min.js}"></script>
 </head>
 <body>
-<div class="container">
-    <h3>Add New Transaction</h3>
-    <hr/>
-    <form action="#" th:action="@{save}" th:object="${transactionForm}" th:method="${id == null} ? 'POST' : 'PUT'">
-        <input type="text" th:field="*{id}" th:readonly="true" class="form-control col-4 mb-4"/>
-        <select th:field="*{type}" class="form-control col-4 mb-4">
-            <option th:each="t : ${T(ir.mvbdx.mywallet.enumeration.TransactionType).values()}" th:value="${t}"
-                    th:text="${t.getDisplayValue()}"/>
-        </select>
-        <div th:with="condition=${accounts.empty}">
-            <h6 th:if="${condition}" class="form-control col-4 mb-4">No Account. Create some!</h6>
-            <select th:unless="${condition}" th:field="*{account}" class="form-control col-4 mb-4">
-                <option value="" selected="selected">Select Account</option>
-                <option th:each="a : ${accounts}" th:value="${a.id}"
-                        th:text="${a.name + ' (' + #numbers.formatDecimal(a.balance, 0, 'COMMA', 0, 'POINT') + ')'}"/>
+<div layout:fragment="content">
+    <div class="container col-sm-4">
+        <h3>Add New Transaction</h3>
+        <hr/>
+        <form action="#" th:action="@{save}" th:object="${transactionForm}" th:method="${id == null} ? 'POST' : 'PUT'">
+            <ul th:if="${#fields.hasErrors('*')}">
+                <li th:each="error : ${#fields.errors('*')}" th:text="${error}">error</li>
+            </ul>
+            <input type="text" th:field="*{id}" th:readonly="true" class="form-control col-4 mb-4"/>
+            <select th:field="*{type}" class="form-control col-4 mb-4" th:required="required">
+                <option th:each="t : ${T(ir.mvbdx.mywallet.enumeration.TransactionType).values()}" th:value="${t}"
+                        th:text="${t.getDisplayValue()}"/>
             </select>
-        </div>
-        <div th:with="condition=${categories.empty}">
-            <h6 th:if="${condition}" class="form-control col-4 mb-4">No Category. Create some!</h6>
-            <select th:unless="${condition}" th:field="*{category}" class="form-control col-4 mb-4">
-                <option value="" selected="selected">Select Category</option>
-                <option th:each="c : ${categories}" th:value="${c.id}" th:text="${c.name}"/>
-            </select>
-        </div>
-        <input type="text" th:field="*{name}" class="form-control col-4 mb-4" placeholder="Enter item name"/>
-        <input type="text" th:field="*{note}" class="form-control col-4 mb-4" placeholder="Enter item note"/>
-        <input type="number" th:field="*{amount}" class="form-control col-4 mb-4" placeholder="Enter amount"/>
-        <input type="date" th:field="*{date}" class="form-control col-4 mb-4"/>
-        <button type="submit" th:disabled="${accounts.empty || categories.empty}" class="btn btn-primary col-2">Save</button>
-    </form>
-    <hr/>
-    <a th:href="@{/transaction/list}">Back to list</a>
+            <div th:with="condition=${accounts.empty}">
+                <h6 th:if="${condition}" class="form-control col-4 mb-4">No Account. Create some!</h6>
+                <select th:unless="${condition}" th:field="*{account}" class="form-control col-4 mb-4"
+                        th:required="required">
+                    <option value="" selected="selected">Select Account</option>
+                    <option th:each="a : ${accounts}" th:value="${a.id}"
+                            th:text="${a.name + ' (' + #numbers.formatDecimal(a.balance, 0, 'COMMA', 0, 'POINT') + ')'}"/>
+                </select>
+            </div>
+            <div th:with="condition=${categories.empty}">
+                <h6 th:if="${condition}" class="form-control col-4 mb-4">No Category. Create some!</h6>
+                <select th:unless="${condition}" th:field="*{category}" class="form-control col-4 mb-4"
+                        th:required="required">
+                    <option value="" selected="selected">Select Category</option>
+                    <option th:each="c : ${categories}" th:value="${c.id}" th:text="${c.name}"/>
+                </select>
+            </div>
+            <input type="text" th:field="*{name}" class="form-control col-4 mb-4" th:required="required"
+                   placeholder="Enter item name"/>
+            <input type="text" th:field="*{note}" class="form-control col-4 mb-4" placeholder="Enter item note"/>
+            <input type="number" th:field="*{amount}" class="form-control col-4 mb-4" th:required="required"
+                   placeholder="Enter amount"/>
+            <!--               data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '﷼ '"-->
+            <input type="date" th:field="*{date}" class="form-control col-4 mb-4" th:required="required"/>
+            <button type="submit" th:disabled="${accounts.empty || categories.empty}" class="btn btn-success">Save</button>
+            <a th:href="@{/transaction/list}" class="btn btn-warning">Cancel</a>
+        </form>
+        <hr/>
+    </div>
+    <script>
+        $(":input").inputmask();
+    </script>
 </div>
 </body>
 </html>
