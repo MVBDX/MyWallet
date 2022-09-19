@@ -56,21 +56,15 @@ public class TransactionServiceImpl extends BaseServiceImpl<Transaction> {
     }
 
     public Double totalIncome() {
-        Double result = transactionRepository.totalIncome();
-        return (result != null) ? result : 0D;
+        return transactionRepository.totalIncome().orElse(0D);
     }
 
     public Double totalSpend() {
-        Double result = transactionRepository.totalSpend();
-        return (result != null) ? result : 0D;
+        return transactionRepository.totalSpend().orElse(0D);
     }
 
     public Double totalBalance() {
-        try {
-            return totalIncome() - totalSpend();
-        } catch (Exception e) {
-            return 0D;
-        }
+        return totalIncome() - totalSpend();
     }
 
     public Paged<Transaction> findAllByCustomerOrderByDate(int pageNumber, int pageSize, Principal principal) {

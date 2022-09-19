@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
@@ -21,10 +21,10 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     Double totalSpendOfAccount(Long accountId);
 
     @Query("SELECT SUM(t.amount) FROM Transaction AS t WHERE t.type = 1")
-    Double totalIncome();
+    Optional<Double> totalIncome();
 
     @Query("SELECT SUM(t.amount) FROM Transaction AS t WHERE t.type = 0")
-    Double totalSpend();
+    Optional<Double> totalSpend();
 
     @Query("SELECT t FROM Transaction t, Account a WHERE t.account = a AND a.customer = :customer ORDER BY t.date DESC, t.id DESC")
     Page<Transaction> findAllByCustomer(@Param("customer") Customer customer, Pageable pageable);
