@@ -6,27 +6,21 @@ import ir.mvbdx.mywallet.exception.EntityNotFoundException;
 import ir.mvbdx.mywallet.repository.AccountRepository;
 import ir.mvbdx.mywallet.repository.CustomerRepository;
 import ir.mvbdx.mywallet.repository.TransactionRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.jpa.repository.JpaRepository;
+import ir.mvbdx.mywallet.service.AccountService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.text.DecimalFormat;
+import java.util.List;
 import java.util.Optional;
 
 @Service
-public class AccountServiceImpl extends BaseServiceImpl<Account> {
-    @Autowired
-    private TransactionRepository transactionRepository;
-    @Autowired
-    private CustomerRepository customerRepository;
-    private AccountRepository accountRepository;
-
-    public AccountServiceImpl(@Qualifier("accountRepository") JpaRepository<Account, Long> baseRepository) {
-        super(baseRepository, "Account");
-        accountRepository = (AccountRepository) baseRepository;
-    }
+@RequiredArgsConstructor
+public class AccountServiceImpl implements AccountService {
+    private final TransactionRepository transactionRepository;
+    private final CustomerRepository customerRepository;
+    private final AccountRepository accountRepository;
 
     public String totalIncome(Long accountId) {
         Optional<Account> account = accountRepository.findById(accountId);
@@ -38,19 +32,39 @@ public class AccountServiceImpl extends BaseServiceImpl<Account> {
         return transactionRepository.totalSpendOfAccount(account.get().getId());
     }
 
+    @Override
     public Double totalBalance(Principal principal) {
         return accountRepository.totalBalance(customerRepository.findByEmail(principal.getName()));
     }
 
     @Override
+    public Account save(Account account) {
+        return accountRepository.save(account);
+    }
+
+    @Override
+    public Account findById(Long id) {
+        return accountRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id, Account.class.getSimpleName()));
+    }
+
+    @Override
+    public List<Account> findAll() {
+        return accountRepository.findAll();
+    }
+
+    @Override
+    public Account update(Long id, Account account) {
+        accountRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id, Account.class.getSimpleName()));
+        return accountRepository.save(account);
+    }
+
+    @Override
     public void delete(Long id) {
         Optional<Account> base = accountRepository.findById(id);
-        if (base.isEmpty())
-            throw new EntityNotFoundException(id, entityName);
-        if (base.get().getTransactions().isEmpty())
-            baseRepository.deleteById(id);
-        else
-            throw new EntityHaveRelationException(entityName + " " + base.get().getName());
+        if (base.isEmpty()) throw new EntityNotFoundException(id, Account.class.getSimpleName());
+        if (!base.get().getTransactions().isEmpty())
+            throw new EntityHaveRelationException(Account.class.getSimpleName() + " " + base.get().getName());
+        accountRepository.deleteById(id);
     }
 
 }

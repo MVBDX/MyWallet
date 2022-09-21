@@ -1,13 +1,13 @@
 package ir.mvbdx.mywallet.controller;
 
-import ir.mvbdx.mywallet.entity.*;
+import ir.mvbdx.mywallet.entity.Account;
 import ir.mvbdx.mywallet.enumeration.AccountType;
-import ir.mvbdx.mywallet.service.impl.AccountServiceImpl;
-import ir.mvbdx.mywallet.service.impl.CustomerServiceImpl;
+import ir.mvbdx.mywallet.service.AccountService;
+import ir.mvbdx.mywallet.service.CustomerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
@@ -18,8 +18,8 @@ import java.util.stream.Stream;
 @RequestMapping("/account")
 @RequiredArgsConstructor
 public class AccountController {
-    private final AccountServiceImpl accountService;
-    private final CustomerServiceImpl customerService;
+    private final AccountService accountService;
+    private final CustomerService customerService;
 
     @GetMapping("/new")
     public String newForm(Model model) {
@@ -34,21 +34,21 @@ public class AccountController {
     @GetMapping({"/list", "/"})
     public ModelAndView listAll(Principal principal) {
         ModelAndView mav = new ModelAndView("account/list-account");
-        mav.addObject("accounts", customerService.getAllAccounts(principal));
+        mav.addObject("accounts", customerService.accountsOfCustomer(principal));
         mav.addObject("totalBalance", accountService.totalBalance(principal));
         return mav;
     }
 
     @PostMapping("/save")
     public String saveForm(@ModelAttribute("accountForm") Account account, Principal principal) {
-        account.setCustomer(customerService.findLoggedInUser(principal));
+        account.setCustomer(customerService.findCustomer(principal));
         accountService.save(account);
         return "redirect:/account/list";
     }
 
     @PutMapping("/edit/save")
     public String update(@ModelAttribute("accountForm") Account account, Principal principal) {
-        account.setCustomer(customerService.findLoggedInUser(principal));
+        account.setCustomer(customerService.findCustomer(principal));
         accountService.update(account.getId(), account);
         return "redirect:/account/list";
     }

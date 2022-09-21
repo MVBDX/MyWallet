@@ -14,7 +14,7 @@ import java.util.Set;
 
 @Entity
 @SQLDelete(sql = "UPDATE account SET deleted = true WHERE id = ?")
-@Where(clause = "deleted=false")
+@Where(clause = "deleted = false")
 @Getter
 @Setter
 @NoArgsConstructor

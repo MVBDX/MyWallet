@@ -1,7 +1,7 @@
 package ir.mvbdx.mywallet.controller;
 
 import ir.mvbdx.mywallet.entity.Category;
-import ir.mvbdx.mywallet.service.impl.CategoryServiceImpl;
+import ir.mvbdx.mywallet.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/category")
 @RequiredArgsConstructor
 public class CategoryController {
-    private final CategoryServiceImpl categoryService;
+    private final CategoryService categoryService;
 
     @GetMapping("/new")
     public String newForm(Model model) {

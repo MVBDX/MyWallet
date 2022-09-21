@@ -1,6 +1,6 @@
 package ir.mvbdx.mywallet.config;
 
-import ir.mvbdx.mywallet.service.UserService;
+import ir.mvbdx.mywallet.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserService userService;
+    private CustomerService customerService;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         var auth = new DaoAuthenticationProvider();
-        auth.setUserDetailsService(userService);
+        auth.setUserDetailsService(customerService);
         auth.setPasswordEncoder(passwordEncoder());
         return auth;
     }

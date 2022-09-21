@@ -4,14 +4,14 @@ import ir.mvbdx.mywallet.entity.Account;
 import ir.mvbdx.mywallet.entity.Category;
 import ir.mvbdx.mywallet.entity.Transaction;
 import ir.mvbdx.mywallet.enumeration.TransactionType;
-import ir.mvbdx.mywallet.service.impl.AccountServiceImpl;
-import ir.mvbdx.mywallet.service.impl.CategoryServiceImpl;
-import ir.mvbdx.mywallet.service.impl.CustomerServiceImpl;
-import ir.mvbdx.mywallet.service.impl.TransactionServiceImpl;
+import ir.mvbdx.mywallet.service.AccountService;
+import ir.mvbdx.mywallet.service.CategoryService;
+import ir.mvbdx.mywallet.service.CustomerService;
+import ir.mvbdx.mywallet.service.TransactionService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
@@ -25,15 +25,15 @@ import java.util.stream.Stream;
 @RequiredArgsConstructor
 public class TransactionController {
 
-    private final TransactionServiceImpl transactionService;
-    private final CategoryServiceImpl categoryService;
-    private final AccountServiceImpl accountService;
-    private final CustomerServiceImpl customerService;
+    private final TransactionService transactionService;
+    private final CategoryService categoryService;
+    private final AccountService accountService;
+    private final CustomerService customerService;
 
     @GetMapping("/new")
     public String newForm(Model model, Principal principal) {
         List<Category> categoryList = categoryService.findAll();
-        List<Account> accountList = customerService.getAllAccounts(principal);
+        List<Account> accountList = customerService.accountsOfCustomer(principal);
         model.addAttribute("transactionForm", new Transaction());
         model.addAttribute("accounts", accountList);
         model.addAttribute("categories", categoryList);

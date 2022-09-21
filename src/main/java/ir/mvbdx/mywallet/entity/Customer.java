@@ -14,7 +14,7 @@ import java.util.List;
 @Entity
 @SQLDelete(sql = "UPDATE customer SET deleted = true WHERE id = ?")
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = "email"))
-@Where(clause = "deleted=false")
+@Where(clause = "deleted = false")
 @Getter
 @Setter
 @NoArgsConstructor
