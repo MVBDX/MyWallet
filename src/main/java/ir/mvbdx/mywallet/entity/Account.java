@@ -19,9 +19,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Account {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Account extends BaseEntity {
     private String name;
     private String number;
     private AccountType type;
@@ -31,7 +29,6 @@ public class Account {
     private Customer customer;
     @OneToMany(mappedBy = "account")
     private Set<Transaction> transactions;
-    private boolean deleted = Boolean.FALSE;
 
     public void deposit(Double amount) {
         this.setBalance(this.getBalance() + amount);

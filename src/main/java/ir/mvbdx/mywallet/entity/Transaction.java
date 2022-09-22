@@ -5,9 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.Where;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -21,10 +19,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Transaction {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Transaction extends BaseEntity {
     private TransactionType type;
     private Double amount;
     @ManyToOne
@@ -39,12 +34,5 @@ public class Transaction {
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
-    @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createDate;
-    @UpdateTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date modifyDate;
-    private boolean deleted = Boolean.FALSE;
 //    transaction for customer
 }

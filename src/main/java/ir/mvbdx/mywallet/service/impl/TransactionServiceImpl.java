@@ -34,9 +34,8 @@ public class TransactionServiceImpl implements TransactionService {
             account.deposit(transaction.getAmount());
         else if (transaction.getType().equals(TransactionType.TRANSFER)) {
             Account transferAccount = accountRepository.findById(transaction.getCategory().getId()).get();
-            Transaction transferTransaction = new Transaction(null, TransactionType.DEPOSIT, transaction.getAmount(),
-                    transferAccount, transaction.getCategory(), transaction.getAccount().getName(), null, transaction.getDate(),
-                    null, null, false);
+            Transaction transferTransaction = new Transaction(TransactionType.DEPOSIT, transaction.getAmount(),
+                    transferAccount, transaction.getCategory(), transaction.getAccount().getName(), null, transaction.getDate());
             account.withdraw(transaction.getAmount());
             transferAccount.deposit(transaction.getAmount());
             transaction.setType(TransactionType.WITHDRAW);

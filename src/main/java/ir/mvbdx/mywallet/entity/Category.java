@@ -18,17 +18,14 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Category {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Category extends BaseEntity {
     private String name;
     @OneToMany(mappedBy = "category")
     private Set<Transaction> transactions;
     @ManyToOne
     @JoinColumn(name = "parent_id")
     private Category parentCategory;
-    @OneToMany(mappedBy="parentCategory")
+    @OneToMany(mappedBy = "parentCategory")
     private Set<Category> subordinates = new HashSet<>();
     private boolean deleted = Boolean.FALSE;
 }

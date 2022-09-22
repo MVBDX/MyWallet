@@ -19,10 +19,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Customer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Customer extends BaseEntity {
     private String username;
     private String password;
     private String firstName;
@@ -31,7 +28,6 @@ public class Customer {
     private String phone;
     @OneToMany(mappedBy = "customer", cascade = CascadeType.PERSIST)
     private List<Account> accounts;
-    private boolean deleted = Boolean.FALSE;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
