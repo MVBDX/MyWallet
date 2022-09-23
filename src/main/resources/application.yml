@@ -1,0 +1,44 @@
+spring:
+  profiles:
+    active: home
+  jpa:
+    hibernate.ddl-auto: update
+    show-sql: true
+  datasource:
+    username: root
+    password: mvbdx
+  security.user:
+    name: admin
+    password: admin
+  thymeleaf:
+    cache: false
+    suffix: .html
+  mvc:
+    hiddenmethod.filter.enabled: true
+server:
+  port: 6060
+---
+spring:
+  config:
+    activate:
+      on-profile: "dev"
+  datasource:
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1
+---
+spring:
+  config:
+    activate:
+      on-profile: "home"
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/wallet?createDatabaseIfNotExist=true
+#    hikari:
+#      minimumIdle: 5
+#      maximumPoolSize: 20
+#      idleTimeout: 30000
+#      maxLifetime: 2000000
+#      connectionTimeout: 30000
+#      poolName: HikariPoolBooks
