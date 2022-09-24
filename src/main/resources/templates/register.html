@@ -29,20 +29,21 @@
 <body>
 <div align="center">
     <h1>User Registration</h1>
-    <form action="#" th:action="@{/result}" method="post" th:object="${customerForm}">
-        <label>Full name:</label>
-        <input type="text" th:field="*{firstName}" /><br/>
-
+    <form th:action="@{/result}" method="post" th:object="${customerDTO}">
         <label>E-mail:</label>
         <input type="text" th:field="*{email}" /><br/>
-
         <label>Password:</label>
         <input type="password" th:field="*{password}" /><br/>
-
-        <label>Profession:</label>
-        <select th:field="*{password}">
-            <option th:each="p : ${listProfession}" th:value="${p}" th:text="${p}" />
-        </select>
+        <label>First name:</label>
+        <input type="text" th:field="*{firstName}" /><br/>
+        <label>Last name:</label>
+        <input type="text" th:field="*{lastName}" /><br/>
+        <label>Role:</label>
+<!--        <select th:field="*{roles}" class="form-control col-4 mb-4">-->
+<!--            <option value="" selected="selected">Select User Type</option>-->
+<!--            <option th:each="t : ${T(ir.mvbdx.mywallet.enumeration.UserType).values()}" th:value="${t}"-->
+<!--                    th:text="${t.getDisplayValue()}"/>-->
+<!--        </select>-->
         <br/>
 
         <button type="submit">Register</button>

@@ -11,6 +11,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
 public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public Customer findCustomer(Principal principal) {
@@ -32,6 +34,12 @@ public class CustomerServiceImpl implements CustomerService {
     public List<Account> accountsOfCustomer(Principal principal) {
         return findCustomer(principal).getAccounts().stream().
                 sorted((Comparator.comparing(Account::getBalance)).reversed()).collect(Collectors.toList());
+    }
+
+    @Override
+    public Customer save(Customer customer) {
+        customer.setPassword(passwordEncoder.encode(customer.getPassword()));
+        return customerRepository.save(customer);
     }
 
     @Override

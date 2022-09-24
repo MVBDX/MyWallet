@@ -11,4 +11,6 @@ public interface CustomerService extends UserDetailsService {
     Customer findCustomer(Principal principal);
 
     List<Account> accountsOfCustomer(Principal principal);
+
+    Customer save(Customer customer);
 }
