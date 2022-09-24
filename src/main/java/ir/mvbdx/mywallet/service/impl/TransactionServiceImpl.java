@@ -68,12 +68,12 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public Double totalIncome() {
-        return transactionRepository.totalIncome().orElse(0D);
+        return transactionRepository.totalAmount(TransactionType.DEPOSIT).orElse(0D);
     }
 
     @Override
     public Double totalSpend() {
-        return transactionRepository.totalSpend().orElse(0D);
+        return transactionRepository.totalAmount(TransactionType.WITHDRAW).orElse(0D);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package ir.mvbdx.mywallet.service.impl;
 
 import ir.mvbdx.mywallet.entity.Account;
+import ir.mvbdx.mywallet.enumeration.TransactionType;
 import ir.mvbdx.mywallet.exception.EntityHaveRelationException;
 import ir.mvbdx.mywallet.exception.EntityNotFoundException;
 import ir.mvbdx.mywallet.repository.AccountRepository;
@@ -11,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
-import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,14 +22,14 @@ public class AccountServiceImpl implements AccountService {
     private final CustomerRepository customerRepository;
     private final AccountRepository accountRepository;
 
-    public String totalIncome(Long accountId) {
+    public Double totalIncome(Long accountId) {
         Optional<Account> account = accountRepository.findById(accountId);
-        return new DecimalFormat("#").format(transactionRepository.totalIncomeOfAccount(account.get().getId()));
+        return transactionRepository.totalOfAccount(account.get().getId(), TransactionType.DEPOSIT);
     }
 
     public Double totalOutcome(Long accountId) {
         Optional<Account> account = accountRepository.findById(accountId);
-        return transactionRepository.totalSpendOfAccount(account.get().getId());
+        return transactionRepository.totalOfAccount(account.get().getId(), TransactionType.WITHDRAW);
     }
 
     @Override
