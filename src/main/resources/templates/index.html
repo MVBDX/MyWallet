@@ -25,6 +25,16 @@
             <li class="nav-item">
                 <a th:text="#{label.pages.transactions}" class="nav-link" th:href="@{/transaction/list}"/>
             </li>
+            <li class="nav-item">
+                <a th:text="#{label.pages.logout}" class="nav-link" th:href="@{/logout}"/>
+            </li>
+            <li class="nav-item">
+                <select id="locales" class="form-select form-select-sm">
+                    <option th:text="Language"></option>
+                    <option value="en" th:text="#{lang.eng}"></option>
+                    <option value="fa" th:text="#{lang.fa}"></option>
+                </select>
+            </li>
         </ul>
     </div>
 </nav>
