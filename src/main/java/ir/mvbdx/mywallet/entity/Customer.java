@@ -13,7 +13,6 @@ import java.util.List;
 
 @Entity
 @SQLDelete(sql = "UPDATE customer SET deleted = true WHERE id = ?")
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 @Where(clause = "deleted = false")
 @Getter
 @Setter
@@ -24,6 +23,7 @@ public class Customer extends BaseEntity {
     private String password;
     private String firstName;
     private String lastName;
+    @Column(unique = true, nullable = false)
     private String email;
     private String phone;
     @OneToMany(mappedBy = "customer", cascade = CascadeType.PERSIST)
