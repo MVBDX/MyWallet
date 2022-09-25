@@ -1,7 +1,6 @@
 package ir.mvbdx.mywallet.controller;
 
 import ir.mvbdx.mywallet.dto.CustomerDTO;
-import ir.mvbdx.mywallet.entity.Category;
 import ir.mvbdx.mywallet.entity.Customer;
 import ir.mvbdx.mywallet.service.CustomerService;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequiredArgsConstructor
@@ -29,8 +27,7 @@ public class HomeController {
 
     @GetMapping("/register")
     public String register(Model model) {
-        CustomerDTO customerDTO = new CustomerDTO();
-        model.addAttribute("customerDTO", customerDTO);
+        model.addAttribute("customerDTO", new CustomerDTO());
         return "register";
     }
 
@@ -40,11 +37,4 @@ public class HomeController {
         return "redirect:/login";
     }
 
-    @PostMapping("/save")
-    public ModelAndView save(@ModelAttribute Category category) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("category-data");
-        modelAndView.addObject("category", category);
-        return modelAndView;
-    }
 }
