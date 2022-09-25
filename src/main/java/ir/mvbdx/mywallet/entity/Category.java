@@ -27,5 +27,4 @@ public class Category extends BaseEntity {
     private Category parentCategory;
     @OneToMany(mappedBy = "parentCategory")
     private Set<Category> subordinates = new HashSet<>();
-    private boolean deleted = Boolean.FALSE;
 }
