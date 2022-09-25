@@ -2,10 +2,15 @@ package ir.mvbdx.mywallet.dto;
 
 import lombok.Data;
 
-import java.util.Set;
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
 
+/**
+ * A DTO for the {@link ir.mvbdx.mywallet.entity.Customer} entity
+ */
 @Data
-public class CustomerDTO {
+public class CustomerDTO implements Serializable {
     private Long id;
     private String username;
     private String password;
@@ -13,6 +18,6 @@ public class CustomerDTO {
     private String lastName;
     private String email;
     private String phone;
-    private Set<AccountDTO> accounts;
-    private Set<String> roles;
+    private List<AccountDTO> accounts;
+    private Collection<RoleDTO> roles;
 }
