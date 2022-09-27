@@ -5,31 +5,64 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
     <script th:src="@{/scripts/jquery.min.js}"></script>
-    <script th:src="@{/scripts/internationalization.js}"></script>
+    <style>
+        .divider:after,
+        .divider:before {content: "";flex: 1;height: 1px;background: #eee;}
+        .h-custom {height: calc(100% - 73px);}
+        @media (max-width: 450px) {  .h-custom {height: 100%;}  }
+    </style>
 </head>
-<body class="text-center row p-5 justify-content-center align-content-center" style="font-family: 'B Mitra'">
+<body>
 
-<div class="bg-white rounded p-1 w-25 text-center">
-    <div class="rounded p-2 w-auto">
+<section class="vh-100">
+    <div class="container-fluid h-custom">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-9 col-lg-6 col-xl-5 text-center">
+                <img src="/images/mywallet.png" class="img-fluid" alt="MyWallet logo">
+            </div>
+            <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                <form action="#" th:action="@{/login}" method="post">
+                    <p class="lead fw-normal mb-0 me-3 text-center" th:text="#{greeting}"/>
+                    <div class="divider d-flex align-items-center my-4">
+                        <p class="text-center fw-bold mx-3 mb-0" th:text="#{application.name}"/>
+                    </div>
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                        <input type="email" name="username" id="form3Example3" class="form-control form-control-lg"
+                               th:placeholder="#{label.pages.home.username.placeholder}"/>
+                        <label class="form-label" for="form3Example3" th:text="#{label.pages.home.username}"/>
+                    </div>
+                    <!-- Password input -->
+                    <div class="form-outline mb-3">
+                        <input type="password" name="password" id="form3Example4" class="form-control form-control-lg"
+                               th:placeholder="#{label.pages.home.password.placeholder}"/>
+                        <label class="form-label" for="form3Example4" th:text="#{label.pages.home.password}"/>
+                    </div>
+                    <!--                    <p th:if="${param.error}" class="text-danger" th:text="#{label.pages.error.register}"/>-->
 
-        <h2 th:text="#{greeting}"/>
-        <br/><br/>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <!-- Checkbox -->
+                        <div class="form-check mb-0">
+                            <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3"/>
+                            <label class="form-check-label" for="form2Example3" th:text="#{label.pages.home.remember}"/>
+                        </div>
+                        <a href="#!" class="text-body" th:text="#{label.pages.home.forgot}"/>
+                    </div>
 
-        <div class="border border-light rounded">
-            <form action="#" th:action="@{/login}" method="post">
-                <p><input class="text-center rounded w-50" type="text" name="username" th:placeholder="#{label.pages.home.username}"/></p>
-                <p><input class="text-center rounded w-50" type="password" name="password" th:placeholder="#{label.pages.home.password}"/></p>
-                <p th:if="${param.error}" class="text-danger" th:text="#{label.pages.error.register}"/>
-                <p><input class="btn btn-dark w-50" type="submit" th:value="#{label.pages.enter}"/></p>
-            </form>
-        </div>
-        <div class="row text-center justify-content-center">
-            <form class="m-2" th:action="@{/register}">
-                <input class="btn btn-dark" type="submit" th:value="#{label.pages.register}">
-            </form>
+                    <div class="text-center text-lg-start mt-4 pt-2">
+                        <button type="submit" class="btn btn-primary btn-lg"
+                                style="padding-left: 2.5rem; padding-right: 2.5rem;" th:text="#{label.pages.login}"/>
+                        <p class="small fw-bold mt-2 pt-1 mb-0">
+                            <a href="register" class="link-danger" th:text="#{label.pages.register}"/></p>
+                    </div>
+
+                </form>
+            </div>
         </div>
     </div>
-</div>
-
+    <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
+        <div class="text-white mb-3 mb-md-0" th:text="#{label.pages.copyright}"/>
+    </div>
+</section>
 </body>
 </html>

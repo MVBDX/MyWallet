@@ -8,36 +8,44 @@
     <script th:src="@{/scripts/internationalization.js}"></script>
 </head>
 <body>
+<!-- Navbar -->
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
-    <a class="navbar-brand" th:href="@{/}" th:text="#{application.name}"/>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar"
-            aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbar">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-                <a th:text="#{label.pages.accounts}" class="nav-link" th:href="@{/account/list}"/>
-            </li>
-            <li class="nav-item">
-                <a th:text="#{label.pages.categories}" class="nav-link" th:href="@{/category/list}"/>
-            </li>
-            <li class="nav-item">
-                <a th:text="#{label.pages.transactions}" class="nav-link" th:href="@{/transaction/list}"/>
-            </li>
-            <li class="nav-item">
-                <a th:text="#{label.pages.logout}" class="nav-link" th:href="@{/logout}"/>
-            </li>
-            <li class="nav-item">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+        <!-- Toggle button -->
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" aria-label="Toggle navigation"
+                data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false">
+            <i class="fas fa-bars"></i>
+        </button>
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Navbar brand -->
+            <a class="navbar-brand mt-2 mt-lg-0" th:href="@{/}">
+                <img src="/images/mywallet.png" height="15" th:alt="#{application.name}" loading="lazy"/>
+            </a>
+            <!-- Left links -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" th:text="#{label.pages.accounts}" th:href="@{/account/list}"/></li>
+                <li class="nav-item"><a class="nav-link" th:text="#{label.pages.categories}" th:href="@{/category/list}"/></li>
+                <li class="nav-item"><a class="nav-link" th:text="#{label.pages.transactions}" th:href="@{/transaction/list}"/></li>
+            </ul>
+            <!-- Left links -->
+            <!-- Right elements -->
+            <div class="d-flex align-items-center">
                 <select id="locales" class="form-select form-select-sm">
                     <option th:text="Language"></option>
                     <option value="en" th:text="#{lang.eng}"></option>
                     <option value="fa" th:text="#{lang.fa}"></option>
                 </select>
-            </li>
-        </ul>
+                <a th:text="#{label.pages.logout}" class="btn btn-primary me-3" th:href="@{/logout}"/>
+            </div>
+            <!-- Right elements -->
+        </div>
     </div>
+    <!-- Collapsible wrapper -->
+    <!-- Container wrapper -->
 </nav>
+<!-- Navbar -->
 <div layout:fragment="content">
     <p></p>
 </div>
