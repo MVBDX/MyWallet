@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="ISO-8859-1">
-    <title>User Registration</title>
+    <title th:text="#{label.pages.register.title}"/>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
     <script th:src="@{/scripts/jquery.min.js}"></script>
     <script th:src="@{/scripts/jquery.inputmask.min.js}"></script>
@@ -16,76 +16,57 @@
                     <div class="card-body p-md-5">
                         <div class="row justify-content-center">
                             <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-
-                                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
-
+                                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4" th:text="#{label.pages.register}"/>
                                 <form class="mx-1 mx-md-4" th:action="@{/result}" method="post"
                                       th:object="${customerDTO}">
-
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input type="email" class="form-control" th:required="required" id="email"
-                                                   th:field="*{email}"/>
-                                            <label class="form-label" for="email">Your Email</label>
+                                            <input type="email" class="form-control" th:required="required" id="email" th:field="*{email}"/>
+                                            <label class="form-label" for="email" th:text="#{label.pages.register.email}"/>
                                         </div>
                                     </div>
-
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input type="password" class="form-control" th:required="required" id="pass"
-                                                   th:field="*{password}"/>
-                                            <label class="form-label" for="pass">Password</label>
+                                            <input type="password" class="form-control" th:required="required" id="pass" th:field="*{password}"/>
+                                            <label class="form-label" for="pass" th:text="#{label.pages.home.password}"/>
                                         </div>
                                     </div>
-
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input type="text" class="form-control" th:required="required" id="name"
-                                                   th:field="*{firstName}"/>
-                                            <label class="form-label" for="name">Your Name</label>
+                                            <input type="text" class="form-control" th:required="required" id="name" th:field="*{firstName}"/>
+                                            <label class="form-label" for="name" th:text="#{label.pages.register.name}"/>
                                         </div>
                                     </div>
-
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input type="text" class="form-control" th:required="required" id="family"
-                                                   th:field="*{lastName}"/>
-                                            <label class="form-label" for="family">Your Lastname</label>
+                                            <input type="text" class="form-control" th:required="required" id="family" th:field="*{lastName}"/>
+                                            <label class="form-label" for="family" th:text="#{label.pages.register.family}"/>
                                         </div>
                                     </div>
-
-                                    <div class="form-check d-flex justify-content-center mb-5">
+<!--                                    <div class="form-check d-flex justify-content-center mb-5">
                                         <input class="form-check-input me-2" type="checkbox" value="" id="agree"/>
                                         <label class="form-check-label" for="agree">
-                                            I agree all statements in <a href="#!">Terms of service</a>
+                                            <a href="#!" th:text="#{label.pages.register.terms}" />
                                         </label>
-                                    </div>
-
+                                    </div>-->
                                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                        <button type="submit" class="btn btn-primary btn-lg">Register</button>
+                                        <button type="submit" class="btn btn-primary btn-lg" th:text="#{label.pages.register}"/>
                                     </div>
-
                                 </form>
-
                             </div>
                             <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
-
-                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
-                                     class="img-fluid" alt="Sample image">
-
+                                <img src="/images/registration.webp" class="img-fluid" alt="registration">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <script>
-            $(":input").inputmask();
-        </script>
+        <script>$(":input").inputmask();</script>
     </div>
 </section>
 </body>
