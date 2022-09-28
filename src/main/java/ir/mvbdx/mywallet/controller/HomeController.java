@@ -32,9 +32,10 @@ public class HomeController {
     }
 
     @PostMapping("/result")
-    public String submissionResult(@ModelAttribute("customerDTO") Customer customer) {
+    public String submitRegistration(@ModelAttribute("customerDTO") Customer customer, Model model) {
         customerService.save(customer);
-        return "redirect:/login";
+        model.addAttribute("customerDTO", customer);
+        return "result";
     }
 
 }

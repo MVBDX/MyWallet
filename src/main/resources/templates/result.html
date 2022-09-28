@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Submission result</title>
+    <title>Successfully registered</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
+    <meta http-equiv="refresh" content="3;url=login"/>
 </head>
 <body>
-    <td th:text="${customerForm.firstName}"></td>
-    <td th:text="${customerForm.email}"></td>
-    <td th:text="${customerForm.password}"></td>
+<br><br><br>
+<h4 th:class="text-center" th:text="'You are registered: ' + ${customerDTO.email}"></h4>
+<h3 th:class="text-center">Redirecting to login page in 5 seconds...</h3>
 </body>
 </html>
