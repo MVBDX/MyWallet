@@ -3,12 +3,15 @@ package ir.mvbdx.mywallet.controller;
 import ir.mvbdx.mywallet.entity.Account;
 import ir.mvbdx.mywallet.entity.Category;
 import ir.mvbdx.mywallet.entity.Transaction;
+import ir.mvbdx.mywallet.entity.paging.Paged;
+import ir.mvbdx.mywallet.entity.paging.Paging;
 import ir.mvbdx.mywallet.enumeration.TransactionType;
 import ir.mvbdx.mywallet.service.AccountService;
 import ir.mvbdx.mywallet.service.CategoryService;
 import ir.mvbdx.mywallet.service.CustomerService;
 import ir.mvbdx.mywallet.service.TransactionService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -49,7 +52,8 @@ public class TransactionController {
     public ModelAndView listAll(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") int pageNumber,
                                 @RequestParam(value = "pageSize", required = false, defaultValue = "15") int pageSize, Principal principal) {
         ModelAndView mav = new ModelAndView("transaction/list-transaction");
-        mav.addObject("transactions", transactionService.findAllByCustomerOrderByDate(pageNumber, pageSize, principal));
+        Page<Transaction> transactions = transactionService.findAllByCustomerOrderByDate(pageNumber, pageSize, principal);
+        mav.addObject("transactions", new Paged<>(transactions, Paging.of(transactions.getTotalPages(), pageNumber, pageSize)));
         mav.addObject("totalIncome", transactionService.totalIncome());
         mav.addObject("totalSpend", transactionService.totalSpend());
         mav.addObject("totalBalance", transactionService.totalBalance());

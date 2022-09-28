@@ -2,8 +2,6 @@ package ir.mvbdx.mywallet.service.impl;
 
 import ir.mvbdx.mywallet.entity.Account;
 import ir.mvbdx.mywallet.entity.Transaction;
-import ir.mvbdx.mywallet.entity.paging.Paged;
-import ir.mvbdx.mywallet.entity.paging.Paging;
 import ir.mvbdx.mywallet.enumeration.TransactionType;
 import ir.mvbdx.mywallet.exception.EntityNotFoundException;
 import ir.mvbdx.mywallet.repository.AccountRepository;
@@ -82,9 +80,8 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public Paged<Transaction> findAllByCustomerOrderByDate(int pageNumber, int pageSize, Principal principal) {
-        PageRequest request = PageRequest.of(pageNumber - 1, pageSize);
-        Page<Transaction> transactionPage = transactionRepository.findAllByCustomer(customerRepository.findByEmail(principal.getName()), request);
-        return new Paged<>(transactionPage, Paging.of(transactionPage.getTotalPages(), pageNumber, pageSize));
+    public Page<Transaction> findAllByCustomerOrderByDate(int pageNumber, int pageSize, Principal principal) {
+        return transactionRepository.findAllByCustomer(customerRepository.findByEmail(principal.getName()),
+                PageRequest.of(pageNumber - 1, pageSize));
     }
 }
