@@ -28,23 +28,23 @@
                     </div>
                     <!-- Email input -->
                     <div class="form-outline mb-4">
-                        <input type="email" name="username" id="form3Example3" class="form-control form-control-lg"
+                        <input type="email" name="username" id="username" class="form-control form-control-lg"
                                th:placeholder="#{label.pages.home.username.placeholder}"/>
-                        <label class="form-label" for="form3Example3" th:text="#{label.pages.home.username}"/>
+                        <label class="form-label" for="username" th:text="#{label.pages.home.username}"/>
                     </div>
                     <!-- Password input -->
                     <div class="form-outline mb-3">
-                        <input type="password" name="password" id="form3Example4" class="form-control form-control-lg"
+                        <input type="password" name="password" id="password" class="form-control form-control-lg"
                                th:placeholder="#{label.pages.home.password.placeholder}"/>
-                        <label class="form-label" for="form3Example4" th:text="#{label.pages.home.password}"/>
+                        <label class="form-label" for="password" th:text="#{label.pages.home.password}"/>
                     </div>
                     <!--                    <p th:if="${param.error}" class="text-danger" th:text="#{label.pages.error.register}"/>-->
 
                     <div class="d-flex justify-content-between align-items-center">
                         <!-- Checkbox -->
                         <div class="form-check mb-0">
-                            <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3"/>
-                            <label class="form-check-label" for="form2Example3" th:text="#{label.pages.home.remember}"/>
+                            <input class="form-check-input me-2" type="checkbox" value="" id="remember"/>
+                            <label class="form-check-label" for="remember" th:text="#{label.pages.home.remember}"/>
                         </div>
                         <a href="#!" class="text-body" th:text="#{label.pages.home.forgot}"/>
                     </div>
