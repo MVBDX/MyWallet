@@ -8,30 +8,29 @@
 <body>
 <div layout:fragment="content">
     <div class="container">
-        <h3>List of Categories</h3>
-        <hr/>
-        <a th:href="@{new}" class="btn btn-primary">Add Category</a>
-        <br/><br/>
         <table class="table table-responsive table-striped table-hover table-sm table-bordered">
             <thead>
             <tr>
-                <th th:width="40px">ID</th>
-                <th>Name</th>
-                <th th:width="125px" class="text-center">Action</th>
+                <th th:width="40px" th:text="#{label.pages.category.id}"/>
+                <th th:text="#{label.pages.category.name}"/>
+                <th th:width="125px" class="text-center" th:text="#{label.pages.action}"/>
             </tr>
             </thead>
             <tbody>
             <tr style="vertical-align: middle" th:each="category: ${categories}">
                 <td th:text="${category.id}"/>
                 <td th:text="${category.name}"/>
-                <td>
-                    <a th:href="@{edit/{id}(id=${category.id})}" class="btn btn-sm btn-primary">Update</a>
+                <td th:class="text-center">
+                    <a th:href="@{edit/{id}(id=${category.id})}" class="btn btn-sm btn-primary"
+                       th:text="#{label.pages.action.update}"/>
                     <a th:href="@{'delete/{id}'(id=${category.id})}" class="btn btn-sm btn-danger"
-                       onClick="return confirm('Are you sure to delete this category?')">Delete</a>
+                       onClick="return confirm('Are you sure to delete this category?')"
+                       th:text="#{label.pages.action.delete}"/>
                 </td>
             </tr>
             </tbody>
         </table>
+        <a th:href="@{new}" class="btn btn-sm btn-warning" th:text="#{label.pages.category.add}"/>
     </div>
 </div>
 </body>
