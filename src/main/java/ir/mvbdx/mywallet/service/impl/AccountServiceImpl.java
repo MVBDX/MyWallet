@@ -59,12 +59,13 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void delete(Long id) {
+    public Boolean delete(Long id) {
         Optional<Account> base = accountRepository.findById(id);
         if (base.isEmpty()) throw new EntityNotFoundException(id, Account.class.getSimpleName());
         if (!base.get().getTransactions().isEmpty())
             throw new EntityHaveRelationException(Account.class.getSimpleName() + " " + base.get().getName());
         accountRepository.deleteById(id);
+        return Boolean.TRUE;
     }
 
 }

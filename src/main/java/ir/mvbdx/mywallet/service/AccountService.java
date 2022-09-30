@@ -16,5 +16,5 @@ public interface AccountService {
 
     Account update(Long id, Account account);
 
-    void delete(Long id);
+    Boolean delete(Long id);
 }
