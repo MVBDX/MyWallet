@@ -42,9 +42,8 @@ public class CategoryServiceImpl implements CategoryService {
         Optional<Category> category = categoryRepository.findById(id);
         if (category.isEmpty())
             throw new EntityNotFoundException(id, Category.class.getSimpleName());
-        if (category.get().getTransactions().isEmpty() && category.get().getSubordinates().isEmpty())
-            categoryRepository.deleteById(id);
-        else
+        if (!category.get().getTransactions().isEmpty() || !category.get().getSubordinates().isEmpty())
             throw new EntityHaveRelationException(Category.class.getSimpleName() + " " + category.get().getName());
+        categoryRepository.deleteById(id);
     }
 }
