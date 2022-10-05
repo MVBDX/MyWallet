@@ -1,5 +1,7 @@
 package ir.mvbdx.mywallet.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import ir.mvbdx.mywallet.enumeration.AccountType;
 import ir.mvbdx.mywallet.exception.AccountException;
 import lombok.AllArgsConstructor;
@@ -26,8 +28,10 @@ public class Account extends BaseEntity {
     private Double balance;
     @ManyToOne
     @JoinColumn(name = "customer_id")
+    @JsonBackReference
     private Customer customer;
     @OneToMany(mappedBy = "account")
+    @JsonManagedReference
     private Set<Transaction> transactions;
 
     public void deposit(Double amount) {

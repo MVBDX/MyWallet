@@ -1,5 +1,6 @@
 package ir.mvbdx.mywallet.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ import java.util.Set;
 public class Category extends BaseEntity {
     private String name;
     @OneToMany(mappedBy = "category")
+    @JsonManagedReference
     private Set<Transaction> transactions;
     @ManyToOne
     @JoinColumn(name = "parent_id")

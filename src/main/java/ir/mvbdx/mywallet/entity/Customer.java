@@ -1,5 +1,7 @@
 package ir.mvbdx.mywallet.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import ir.mvbdx.mywallet.enumeration.CustomerStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,6 +29,7 @@ public class Customer extends BaseEntity {
     private String email;
     private String phone;
     @OneToMany(mappedBy = "customer", cascade = CascadeType.PERSIST)
+    @JsonManagedReference
     private List<Account> accounts;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
