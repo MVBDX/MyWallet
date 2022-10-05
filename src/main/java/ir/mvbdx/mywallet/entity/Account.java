@@ -34,14 +34,14 @@ public class Account extends BaseEntity {
     @JsonManagedReference
     private Set<Transaction> transactions;
 
-    public void deposit(Double amount) {
-        this.setBalance(this.getBalance() + amount);
+    public synchronized void deposit(Double amount) {
+        balance += amount;
     }
 
-    public void withdraw(Double amount) {
-        if (this.getBalance() >= amount) {
-            this.setBalance(this.getBalance() - amount);
-        } else throw new AccountException("Account balance is not enough!");
+    public synchronized void withdraw(Double amount) {
+        if (this.getBalance() < amount)
+            throw new AccountException("Account balance is not enough!");
+        balance -= amount;
     }
 
 }
