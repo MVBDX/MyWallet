@@ -5,28 +5,35 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
+    <script th:src="@{/scripts/jquery.min.js}"></script>
+    <script th:src="@{/scripts/jquery.inputmask.min.js}"></script>
 </head>
 <body>
 <div layout:fragment="content">
     <div class="container col-sm-4">
-        <h3>Add New Account</h3>
+        <h3 th:text="#{label.pages.account.add}"/>
         <hr/>
         <form action="#" th:action="@{save}" th:object="${accountForm}" th:method="${id == null} ? 'POST' : 'PUT'">
             <input type="text" th:field="*{id}" th:readonly="true" class="form-control col-4 mb-4"/>
-            <input type="text" th:field="*{name}" class="form-control col-4 mb-4" placeholder="Enter account name"/>
-            <input type="text" th:field="*{number}" class="form-control col-4 mb-4" placeholder="Enter account number"/>
-            <select th:field="*{type}" class="form-control col-4 mb-4">
-                <option value="" selected="selected">Select Account Type</option>
+            <input type="text" th:field="*{name}" class="form-control col-4 mb-4" th:required="required"
+                   th:placeholder="#{label.pages.account.enter.name}"/>
+            <input type="text" th:field="*{number}" class="form-control col-4 mb-4"
+                   th:placeholder="#{label.pages.account.enter.number}"/>
+            <select th:field="*{type}" class="form-control col-4 mb-4" th:required="required">
+                <option value="" selected="selected" th:text="#{label.pages.account.select.type}"/>
                 <option th:each="t : ${T(ir.mvbdx.mywallet.enumeration.AccountType).values()}" th:value="${t}"
                         th:text="${t.getDisplayValue()}"/>
             </select>
-            <input type="text" th:field="*{balance}" class="form-control col-4 mb-4"
-                   placeholder="Enter account balance"/>
-            <button type="submit" class="btn btn-success">Save</button>
-            <a th:href="@{/account/list}" class="btn btn-warning">Cancel</a>
+            <input type="text" th:field="*{balance}" class="form-control col-4 mb-4" th:required="required"
+                   th:placeholder="#{label.pages.account.enter.balance}"/>
+            <button type="submit" class="btn btn-success" th:text="#{label.pages.action.save}"/>
+            <a th:href="@{/account/list}" class="btn btn-warning" th:text="#{label.pages.action.cancel}"/>
         </form>
         <hr/>
     </div>
+    <script>
+        $(":input").inputmask();
+    </script>
 </div>
 </body>
 </html>

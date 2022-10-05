@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
+    <script th:src="@{/scripts/jquery.min.js}"></script>
+    <script th:src="@{/scripts/jquery.inputmask.min.js}"></script>
 </head>
 <body>
 <div layout:fragment="content">
@@ -13,18 +15,22 @@
         <form action="#" th:action="@{save}" th:object="${categoryForm}" th:method="${id == null} ? 'POST' : 'PUT'">
             <input type="text" th:field="*{id}" th:readonly="true" class="form-control col-4 mb-4"/>
             <div th:with="condition=${categories.empty}">
-                <h6 th:if="${condition}" class="form-control col-4 mb-4">No Category.</h6>
+                <h6 th:if="${condition}" class="form-control col-4 mb-4" th:text="#{label.pages.category.no.category}"/>
                 <select th:unless="${condition}" th:field="*{parentCategory}" class="form-control col-4 mb-4">
                     <option value="" selected="selected" th:text="#{label.pages.category.parent}"/>
                     <option th:each="c : ${categories}" th:value="${c.id}" th:text="${c.name}"/>
                 </select>
             </div>
-            <input type="text" th:field="*{name}" class="form-control col-4 mb-4" th:placeholder="#{label.pages.category.enter}"/>
+            <input type="text" th:field="*{name}" class="form-control col-4 mb-4" th:required="required"
+                   th:placeholder="#{label.pages.category.enter}"/>
             <button type="submit" class="btn btn-success" th:text="#{label.pages.action.save}"/>
             <a th:href="@{/category/list}" class="btn btn-warning" th:text="#{label.pages.action.cancel}"/>
         </form>
         <hr/>
     </div>
+    <script>
+        $(":input").inputmask();
+    </script>
 </div>
 </body>
 </html>
