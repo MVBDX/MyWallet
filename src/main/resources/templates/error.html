@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{label.pages.error.title}"/>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="d-flex align-items-center justify-content-center vh-100">
+    <div class="text-center">
+        <h1 class="display-1 fw-bold">404</h1>
+        <p class="fs-3"> <span class="text-danger" th:text="#{label.pages.error.opps}"/>
+            <span th:text="#{label.pages.error.found}"/> </p>
+        <h4 th:class="text-center" th:text="${exception}"></h4>
+        <p class="lead" th:text="#{label.pages.error.exist}"/>
+        <a th:href="@{/}" class="btn btn-primary" th:text="#{label.pages.home.back}"/>
+    </div>
+</div>
+</body>
+</html>
