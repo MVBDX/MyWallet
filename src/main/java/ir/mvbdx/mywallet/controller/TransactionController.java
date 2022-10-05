@@ -54,9 +54,9 @@ public class TransactionController {
         ModelAndView mav = new ModelAndView("transaction/list-transaction");
         Page<Transaction> transactions = transactionService.findAllByCustomerOrderByDate(pageNumber, pageSize, principal);
         mav.addObject("transactions", new Paged<>(transactions, Paging.of(transactions.getTotalPages(), pageNumber, pageSize)));
-        mav.addObject("totalIncome", transactionService.totalIncome());
-        mav.addObject("totalSpend", transactionService.totalSpend());
-        mav.addObject("totalBalance", transactionService.totalBalance());
+        mav.addObject("totalIncome", transactionService.totalIncome(principal));
+        mav.addObject("totalSpend", transactionService.totalSpend(principal));
+        mav.addObject("totalBalance", transactionService.totalBalance(principal));
         mav.addObject("totalAccountsBalance", accountService.totalBalance(principal));
         return mav;
     }

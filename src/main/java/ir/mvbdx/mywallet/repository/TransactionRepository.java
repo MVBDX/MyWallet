@@ -18,8 +18,8 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     @Query("SELECT SUM(t.amount) FROM Transaction AS t WHERE t.type = :transactionType AND t.account.id = :accountId")
     Double totalOfAccount(Long accountId, TransactionType transactionType);
 
-    @Query("SELECT SUM(t.amount) FROM Transaction AS t WHERE t.type = :transactionType")
-    Optional<Double> totalAmount(TransactionType transactionType);
+    @Query("SELECT SUM(t.amount) FROM Transaction AS t, Account AS a WHERE t.type = :transactionType AND t.account = a AND a.customer = :customer")
+    Optional<Double> totalAmount(Customer customer, TransactionType transactionType);
 
     @Query("SELECT t FROM Transaction t, Account a WHERE t.account = a AND a.customer = :customer ORDER BY t.date DESC, t.id DESC")
     Page<Transaction> findAllByCustomer(@Param("customer") Customer customer, Pageable pageable);

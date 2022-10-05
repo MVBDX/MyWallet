@@ -7,11 +7,11 @@ import java.security.Principal;
 import java.util.List;
 
 public interface TransactionService {
-    Double totalIncome();
+    Double totalIncome(Principal principal);
 
-    Double totalSpend();
+    Double totalSpend(Principal principal);
 
-    Double totalBalance();
+    Double totalBalance(Principal principal);
 
     Page<Transaction> findAllByCustomerOrderByDate(int pageNumber, int pageSize, Principal principal);
 
