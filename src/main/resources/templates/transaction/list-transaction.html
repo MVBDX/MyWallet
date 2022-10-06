@@ -56,13 +56,13 @@
                 th:style="'color:white; background-color:lightgreen'"></td>
             <td></td>
             <td></td>
-            <td th:class="text-center"><a th:href="@{new}" class="btn btn-sm btn-warning" th:text="#{label.pages.transaction.add}"/></td>
+            <td th:class="text-center"><a th:href="@{new}" class="btn btn-sm btn-success" th:text="#{label.pages.transaction.add}"/></td>
         </tr>
         </tfoot>
     </table>
 
     <nav aria-label="Page navigation" class="paging">
-        <ul class="pagination" th:if="${transactions.page.totalPages > 1}">
+        <ul class="pagination" th:if="${transactions.page.totalPages > 1}" style="justify-content: center;">
             <li class="page-item" th:classappend="${!transactions.paging.isPrevEnabled()? 'disabled' : ''}">
                 <a class="page-link" th:text="#{label.pages.pagination.previous}"
                    th:href="@{'/transaction/list?pageNumber=' + ${transactions.paging.pageNumber - 1}}" tabindex="-1"/>
