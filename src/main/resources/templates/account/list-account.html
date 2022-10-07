@@ -38,7 +38,7 @@
             <tfoot>
             <tr>
                 <td></td>
-                <td style="background-color: black; color: yellow">Total</td>
+                <td style="background-color: black; color: yellow" th:text="#{label.pages.transaction.footer.total}"/>
                 <td th:text="${#numbers.formatDecimal(totalBalance, 0, 'COMMA', 0, 'POINT')}"
                     th:style="'color:white; background-color:green'"></td>
                 <td></td>
