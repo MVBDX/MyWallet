@@ -29,6 +29,18 @@ spring:
 spring:
   config:
     activate:
+      on-profile: "postgres"
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/wallet
+    username: postgres
+    password: postgres
+---
+spring:
+  config:
+    activate:
       on-profile: "home"
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
