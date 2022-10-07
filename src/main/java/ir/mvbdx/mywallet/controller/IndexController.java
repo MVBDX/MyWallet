@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @RequiredArgsConstructor
-public class HomeController {
+public class IndexController {
     private final CustomerService customerService;
 
     @GetMapping("/login")
