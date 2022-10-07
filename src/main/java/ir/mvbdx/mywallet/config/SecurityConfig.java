@@ -38,21 +38,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         String[] staticResources = {"/css/**", "/images/**", "/fonts/**", "/scripts/**"};
 
         http
-                .sessionManagement()
-                .maximumSessions(1)
-                .expiredUrl("/expired")
-                .maxSessionsPreventsLogin(false)
-                .and()
-
-                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-                .invalidSessionUrl("/invalid")
-                .and()
-
+//                .sessionManagement().maximumSessions(1).expiredUrl("/expired").maxSessionsPreventsLogin(false).and()
+//                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED).invalidSessionUrl("/invalid").and()
                 .authorizeRequests()
                 .antMatchers(staticResources).permitAll()
                 .antMatchers("/login", "/register", "/result").permitAll()
                 .and()
-
                 .authorizeRequests()
 //                .antMatchers(HttpMethod.DELETE).hasRole("ADMIN")
                 .antMatchers("/api/users/").hasAnyRole("ADMIN", "MANAGER", "USER")
@@ -61,17 +52,53 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/users/**", "/api/user/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
-
+                .exceptionHandling().accessDeniedPage("/access-denied")
+                .and()
+                .httpBasic().and()
                 .formLogin().loginPage("/login").permitAll()
                 .defaultSuccessUrl("/index", true)
                 .and()
-
                 .logout().permitAll()
                 .logoutUrl("/logout")
                 .and()
-
                 .csrf().disable()
                 .headers().frameOptions().disable()
         ;
     }
+    /*@Configuration
+    @Order(1)
+    public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
+
+        @Override
+        protected void configure(HttpSecurity http) throws Exception {
+            http
+                    .antMatcher("/api/**")
+                    .authorizeRequests()
+                    .anyRequest().hasRole("USER")
+                    .and()
+                    .httpBasic()
+				.and()
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            ;
+        }
+    }
+
+    @Configuration
+    @Order(2)
+    public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+        @Override
+        protected void configure(HttpSecurity http) throws Exception {
+            String[] staticResources = {"/css/**", "/images/**", "/fonts/**", "/scripts/**"};
+
+            http.csrf().disable()
+                    .authorizeRequests()
+                    .antMatchers(staticResources).permitAll()
+                    .antMatchers("/login", "/register", "/result").permitAll()
+                    .and()
+                    .formLogin()
+                    .and()
+                    .logout().permitAll()
+            ;
+        }
+    }*/
 }
