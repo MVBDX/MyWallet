@@ -1,7 +1,7 @@
 package ir.mvbdx.mywallet.service.impl;
 
 import ir.mvbdx.mywallet.entity.Account;
-import ir.mvbdx.mywallet.enumeration.TransactionType;
+import ir.mvbdx.mywallet.entity.Transaction;
 import ir.mvbdx.mywallet.exception.EntityHaveRelationException;
 import ir.mvbdx.mywallet.exception.EntityNotFoundException;
 import ir.mvbdx.mywallet.repository.AccountRepository;
@@ -14,6 +14,10 @@ import org.springframework.stereotype.Service;
 import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+
+import static ir.mvbdx.mywallet.enumeration.TransactionType.DEPOSIT;
+import static ir.mvbdx.mywallet.enumeration.TransactionType.WITHDRAW;
 
 @Service
 @RequiredArgsConstructor
@@ -24,12 +28,17 @@ public class AccountServiceImpl implements AccountService {
 
     public Double totalIncome(Long accountId) {
         Optional<Account> account = accountRepository.findById(accountId);
-        return transactionRepository.totalOfAccount(account.get().getId(), TransactionType.DEPOSIT);
+        return transactionRepository.totalOfAccount(account.get().getId(), DEPOSIT);
     }
 
     public Double totalOutcome(Long accountId) {
         Optional<Account> account = accountRepository.findById(accountId);
-        return transactionRepository.totalOfAccount(account.get().getId(), TransactionType.WITHDRAW);
+        return transactionRepository.totalOfAccount(account.get().getId(), WITHDRAW);
+    }
+
+    @Override
+    public Set<Transaction> accountTransactions(Long accountId){
+        return accountRepository.findById(accountId).get().getTransactions();
     }
 
     @Override
