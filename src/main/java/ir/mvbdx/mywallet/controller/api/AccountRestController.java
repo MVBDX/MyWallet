@@ -2,6 +2,7 @@ package ir.mvbdx.mywallet.controller.api;
 
 import ir.mvbdx.mywallet.dto.AccountDTO;
 import ir.mvbdx.mywallet.dto.CustomerDTO;
+import ir.mvbdx.mywallet.dto.TransactionDTO;
 import ir.mvbdx.mywallet.entity.Account;
 import ir.mvbdx.mywallet.service.AccountService;
 import ir.mvbdx.mywallet.service.CustomerService;
@@ -14,13 +15,14 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/account")
 @RequiredArgsConstructor
 public class
-AccountApiController {
+AccountRestController {
     private final AccountService accountService;
     private final CustomerService customerService;
     private final ModelMapper modelMapper;
@@ -54,6 +56,12 @@ AccountApiController {
         if (!accountService.delete(id))
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(id, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}/transactions")
+    public Set<TransactionDTO> findAllTransactions(@PathVariable("id") Long id){
+        return accountService.accountTransactions(id).stream()
+                .map(transaction -> modelMapper.map(transaction,TransactionDTO.class)).collect(Collectors.toSet());
     }
 
 }
