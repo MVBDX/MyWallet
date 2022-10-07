@@ -1,9 +1,9 @@
 package ir.mvbdx.mywallet.enumeration;
 
 public enum RoleType {
-    CUSTOMER("Customer"),
-    MANAGER("Manager"),
-    ADMIN("Admin");
+    ROLE_CUSTOMER("Customer"),
+    ROLE_MANAGER("Manager"),
+    ROLE_ADMIN("Admin");
 
     private final String displayValue;
 

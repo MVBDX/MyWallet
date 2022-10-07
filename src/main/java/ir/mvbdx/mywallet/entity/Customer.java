@@ -10,8 +10,9 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @SQLDelete(sql = "UPDATE customer SET deleted = true WHERE id = ?")
@@ -34,7 +35,16 @@ public class Customer extends BaseEntity {
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    private Collection<Role> roles;
+    private Set<Role> roles;
+    @Transient
+    private Set<Privilege> privileges;
     @Enumerated(EnumType.STRING)
     private CustomerStatus customerStatus;
+
+    public Set<Privilege> getPrivileges() {
+        return this.roles.stream()
+                .map(Role::getPrivileges)
+                .flatMap(Set::stream)
+                .collect(Collectors.toSet());
+    }
 }

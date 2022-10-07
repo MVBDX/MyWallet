@@ -1,10 +1,14 @@
 package ir.mvbdx.mywallet.enumeration;
 
 public enum CustomerPrivilege {
-    STUDENT_READ("student:read"),
-    STUDENT_WRITE("student:write"),
-    COURSE_READ("course:read"),
-    COURSE_WRITE("course:write");
+    TRANSACTION_READ("transaction:read"),
+    TRANSACTION_WRITE("transaction:write"),
+    CATEGORY_READ("category:read"),
+    CATEGORY_WRITE("category:write"),
+    ACCOUNT_READ("account:read"),
+    ACCOUNT_WRITE("account:write"),
+    CUSTOMER_READ("customer:read"),
+    CUSTOMER_WRITE("customer:write");
 
     private final String permission;
 
