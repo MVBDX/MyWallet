@@ -82,7 +82,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public Page<Transaction> findAllByCustomerOrderByDate(int pageNumber, int pageSize, Principal principal) {
-        return transactionRepository.findAllByCustomer(customerRepository.findByEmail(principal.getName()),
-                PageRequest.of(pageNumber - 1, pageSize));
+        return transactionRepository.findAllByAccount_CustomerOrderByDateDescIdDesc
+                (customerRepository.findByEmail(principal.getName()), PageRequest.of(pageNumber - 1, pageSize));
     }
 }
