@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import static ir.mvbdx.mywallet.enumeration.TransactionType.DEPOSIT;
@@ -22,23 +21,25 @@ import static ir.mvbdx.mywallet.enumeration.TransactionType.WITHDRAW;
 @Service
 @RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService {
+    public static final String CLASS_NAME = Account.class.getSimpleName();
     private final TransactionRepository transactionRepository;
     private final CustomerRepository customerRepository;
     private final AccountRepository accountRepository;
 
     public Double totalIncome(Long accountId) {
-        Optional<Account> account = accountRepository.findById(accountId);
-        return transactionRepository.totalOfAccount(account.get().getId(), DEPOSIT);
+        return transactionRepository.totalOfAccount(accountRepository.findById(accountId)
+                .orElseThrow(() -> new EntityNotFoundException(accountId, CLASS_NAME)).getId(), DEPOSIT);
     }
 
     public Double totalOutcome(Long accountId) {
-        Optional<Account> account = accountRepository.findById(accountId);
-        return transactionRepository.totalOfAccount(account.get().getId(), WITHDRAW);
+        return transactionRepository.totalOfAccount(accountRepository.findById(accountId)
+                .orElseThrow(() -> new EntityNotFoundException(accountId, CLASS_NAME)).getId(), WITHDRAW);
     }
 
     @Override
-    public Set<Transaction> accountTransactions(Long accountId){
-        return accountRepository.findById(accountId).get().getTransactions();
+    public Set<Transaction> accountTransactions(Long accountId) {
+        return accountRepository.findById(accountId).orElseThrow(() ->
+                new EntityNotFoundException(accountId, CLASS_NAME)).getTransactions();
     }
 
     @Override
@@ -53,7 +54,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account findById(Long id) {
-        return accountRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id, Account.class.getSimpleName()));
+        return accountRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id, CLASS_NAME));
     }
 
     @Override
@@ -63,16 +64,15 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account update(Long id, Account account) {
-        accountRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id, Account.class.getSimpleName()));
+        accountRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id, CLASS_NAME));
         return accountRepository.save(account);
     }
 
     @Override
     public Boolean delete(Long id) {
-        Optional<Account> base = accountRepository.findById(id);
-        if (base.isEmpty()) throw new EntityNotFoundException(id, Account.class.getSimpleName());
-        if (!base.get().getTransactions().isEmpty())
-            throw new EntityHaveRelationException(Account.class.getSimpleName() + " " + base.get().getName());
+        Account account = accountRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id, CLASS_NAME));
+        if (!account.getTransactions().isEmpty())
+            throw new EntityHaveRelationException(CLASS_NAME + " " + account.getName());
         accountRepository.deleteById(id);
         return Boolean.TRUE;
     }
