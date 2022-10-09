@@ -24,7 +24,8 @@ spring:
       on-profile: "dev"
   datasource:
     driverClassName: org.h2.Driver
-    url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1
+    url: jdbc:h2:file:~/spring-boot-h2-db
+#    url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1
 ---
 spring:
   config:
