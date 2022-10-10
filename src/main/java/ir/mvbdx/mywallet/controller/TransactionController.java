@@ -89,11 +89,9 @@ public class TransactionController {
     }
 
     @GetMapping("/delete/{id}")
-//    @ResponseStatus(HttpStatus.OK) : is for rest
     public String delete(@PathVariable("id") Long id) {
         transactionService.delete(id);
         return "redirect:/transaction/list";
     }
-
 
 }

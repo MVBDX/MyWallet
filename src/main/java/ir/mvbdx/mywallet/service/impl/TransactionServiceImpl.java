@@ -20,6 +20,7 @@ import static ir.mvbdx.mywallet.enumeration.TransactionType.*;
 @Service
 @RequiredArgsConstructor
 public class TransactionServiceImpl implements TransactionService {
+    public static final String CLASS_NAME = Transaction.class.getSimpleName();
     private final AccountRepository accountRepository;
     private final CustomerRepository customerRepository;
     private final TransactionRepository transactionRepository;
@@ -45,7 +46,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public Transaction findById(Long id) {
-        return transactionRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id, Transaction.class.getSimpleName()));
+        return transactionRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id, CLASS_NAME));
     }
 
     @Override
@@ -55,13 +56,13 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public Transaction update(Long id, Transaction transaction) {
-        transactionRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id, Transaction.class.getSimpleName()));
+        transactionRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id, CLASS_NAME));
         return transactionRepository.save(transaction);
     }
 
     @Override
     public void delete(Long id) {
-        transactionRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id, Transaction.class.getSimpleName()));
+        transactionRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id, CLASS_NAME));
         transactionRepository.deleteById(id);
     }
 
