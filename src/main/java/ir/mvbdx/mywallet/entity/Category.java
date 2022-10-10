@@ -21,8 +21,8 @@ import java.util.Set;
 @AllArgsConstructor
 public class Category extends BaseEntity {
     private String name;
-    @OneToMany(mappedBy = "category")
     @JsonManagedReference
+    @OneToMany(mappedBy = "category")
     private Set<Transaction> transactions;
     @ManyToOne
     @JoinColumn(name = "parent_id")

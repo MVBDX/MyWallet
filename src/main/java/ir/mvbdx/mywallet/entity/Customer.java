@@ -2,10 +2,7 @@ package ir.mvbdx.mywallet.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import ir.mvbdx.mywallet.enumeration.CustomerStatus;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
@@ -21,6 +18,7 @@ import java.util.stream.Collectors;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Customer extends BaseEntity {
     private String username;
     private String password;
@@ -29,8 +27,8 @@ public class Customer extends BaseEntity {
     @Column(unique = true, nullable = false)
     private String email;
     private String phone;
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.PERSIST)
     @JsonManagedReference
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.PERSIST)
     private List<Account> accounts;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),

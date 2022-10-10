@@ -26,12 +26,12 @@ public class Account extends BaseEntity {
     private String number;
     private AccountType type;
     private Double balance;
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "customer_id")
-    @JsonBackReference
     private Customer customer;
-    @OneToMany(mappedBy = "account")
     @JsonManagedReference
+    @OneToMany(mappedBy = "account")
     private Set<Transaction> transactions;
 
     public synchronized void deposit(Double amount) {

@@ -23,14 +23,14 @@ import java.util.Date;
 public class Transaction extends BaseEntity {
     private TransactionType type;
     private Double amount;
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "account_id")
-    @JsonBackReference
 //    @NotNull
     private Account account;
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "category_id")
-    @JsonBackReference
     private Category category;
     private String name;
     private String note;

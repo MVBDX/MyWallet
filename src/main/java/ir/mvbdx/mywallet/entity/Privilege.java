@@ -11,6 +11,7 @@ import java.util.Collection;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Privilege extends BaseEntity {
     @Column(unique = true, nullable = false)
     @Enumerated(EnumType.STRING)
