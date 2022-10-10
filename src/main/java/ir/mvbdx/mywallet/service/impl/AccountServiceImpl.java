@@ -37,7 +37,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Set<Transaction> accountTransactions(Long accountId) {
+    public Set<Transaction> getTransactions(Long accountId) {
         return accountRepository.findById(accountId).orElseThrow(() ->
                 new EntityNotFoundException(accountId, CLASS_NAME)).getTransactions();
     }
@@ -72,7 +72,7 @@ public class AccountServiceImpl implements AccountService {
     public Boolean delete(Long id) {
         Account account = accountRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id, CLASS_NAME));
         if (!account.getTransactions().isEmpty())
-            throw new EntityHaveRelationException(CLASS_NAME + " " + account.getName());
+            throw new EntityHaveRelationException(CLASS_NAME + " " + account.getName(), id);
         accountRepository.deleteById(id);
         return Boolean.TRUE;
     }

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 public interface AccountService {
-    Set<Transaction> accountTransactions(Long accountId);
+    Set<Transaction> getTransactions(Long accountId);
 
     Double totalBalance(Principal principal);
 

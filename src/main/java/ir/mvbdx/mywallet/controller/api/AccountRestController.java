@@ -60,7 +60,7 @@ AccountRestController {
 
     @GetMapping("/{id}/transactions")
     public Set<TransactionDTO> findAllTransactions(@PathVariable("id") Long id){
-        return accountService.accountTransactions(id).stream()
+        return accountService.getTransactions(id).stream()
                 .map(transaction -> modelMapper.map(transaction,TransactionDTO.class)).collect(Collectors.toSet());
     }
 
