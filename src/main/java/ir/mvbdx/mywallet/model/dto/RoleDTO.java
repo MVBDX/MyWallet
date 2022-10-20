@@ -1,11 +1,12 @@
-package ir.mvbdx.mywallet.dto;
+package ir.mvbdx.mywallet.model.dto;
 
+import ir.mvbdx.mywallet.model.entity.Role;
 import lombok.Data;
 
 import java.io.Serializable;
 
 /**
- * A DTO for the {@link ir.mvbdx.mywallet.entity.Role} entity
+ * A DTO for the {@link Role} entity
  */
 @Data
 public class RoleDTO implements Serializable {

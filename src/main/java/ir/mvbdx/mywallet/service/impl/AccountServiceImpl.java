@@ -1,7 +1,7 @@
 package ir.mvbdx.mywallet.service.impl;
 
-import ir.mvbdx.mywallet.entity.Account;
-import ir.mvbdx.mywallet.entity.Transaction;
+import ir.mvbdx.mywallet.model.entity.Account;
+import ir.mvbdx.mywallet.model.entity.Transaction;
 import ir.mvbdx.mywallet.exception.EntityHaveRelationException;
 import ir.mvbdx.mywallet.exception.EntityNotFoundException;
 import ir.mvbdx.mywallet.repository.AccountRepository;
@@ -15,8 +15,8 @@ import java.security.Principal;
 import java.util.List;
 import java.util.Set;
 
-import static ir.mvbdx.mywallet.enumeration.TransactionType.DEPOSIT;
-import static ir.mvbdx.mywallet.enumeration.TransactionType.WITHDRAW;
+import static ir.mvbdx.mywallet.model.enums.TransactionType.DEPOSIT;
+import static ir.mvbdx.mywallet.model.enums.TransactionType.WITHDRAW;
 
 @Service
 @RequiredArgsConstructor

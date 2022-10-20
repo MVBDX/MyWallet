@@ -1,8 +1,8 @@
 package ir.mvbdx.mywallet.repository;
 
-import ir.mvbdx.mywallet.entity.Customer;
-import ir.mvbdx.mywallet.entity.Transaction;
-import ir.mvbdx.mywallet.enumeration.TransactionType;
+import ir.mvbdx.mywallet.model.entity.Customer;
+import ir.mvbdx.mywallet.model.entity.Transaction;
+import ir.mvbdx.mywallet.model.enums.TransactionType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

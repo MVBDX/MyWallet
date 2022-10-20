@@ -1,9 +1,9 @@
 package ir.mvbdx.mywallet.controller.api;
 
-import ir.mvbdx.mywallet.dto.AccountDTO;
-import ir.mvbdx.mywallet.dto.CustomerDTO;
-import ir.mvbdx.mywallet.dto.TransactionDTO;
-import ir.mvbdx.mywallet.entity.Account;
+import ir.mvbdx.mywallet.model.dto.AccountDTO;
+import ir.mvbdx.mywallet.model.dto.CustomerDTO;
+import ir.mvbdx.mywallet.model.dto.TransactionDTO;
+import ir.mvbdx.mywallet.model.entity.Account;
 import ir.mvbdx.mywallet.service.AccountService;
 import ir.mvbdx.mywallet.service.CustomerService;
 import lombok.RequiredArgsConstructor;

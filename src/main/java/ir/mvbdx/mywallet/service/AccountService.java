@@ -1,7 +1,7 @@
 package ir.mvbdx.mywallet.service;
 
-import ir.mvbdx.mywallet.entity.Account;
-import ir.mvbdx.mywallet.entity.Transaction;
+import ir.mvbdx.mywallet.model.entity.Account;
+import ir.mvbdx.mywallet.model.entity.Transaction;
 
 import java.security.Principal;
 import java.util.List;

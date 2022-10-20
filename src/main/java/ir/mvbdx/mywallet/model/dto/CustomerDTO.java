@@ -1,13 +1,13 @@
-package ir.mvbdx.mywallet.dto;
+package ir.mvbdx.mywallet.model.dto;
 
+import ir.mvbdx.mywallet.model.entity.Customer;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.List;
 
 /**
- * A DTO for the {@link ir.mvbdx.mywallet.entity.Customer} entity
+ * A DTO for the {@link Customer} entity
  */
 @Data
 public class CustomerDTO implements Serializable {
@@ -18,6 +18,6 @@ public class CustomerDTO implements Serializable {
     private String lastName;
     private String email;
     private String phone;
-    private List<AccountDTO> accounts;
+//    private List<AccountDTO> accounts;
     private Collection<RoleDTO> roles;
 }

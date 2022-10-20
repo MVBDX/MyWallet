@@ -1,4 +1,4 @@
-package ir.mvbdx.mywallet.entity;
+package ir.mvbdx.mywallet.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;

@@ -1,6 +1,6 @@
 package ir.mvbdx.mywallet.controller;
 
-import ir.mvbdx.mywallet.entity.Category;
+import ir.mvbdx.mywallet.model.entity.Category;
 import ir.mvbdx.mywallet.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -48,7 +48,6 @@ public class CategoryController {
     }
 
     @GetMapping("/delete/{id}")
-//    @ResponseStatus(HttpStatus.OK) : is for rest
     public String delete(@PathVariable("id") Long id) {
         categoryService.delete(id);
         return "redirect:/category/list";

@@ -1,4 +1,4 @@
-package ir.mvbdx.mywallet.enumeration;
+package ir.mvbdx.mywallet.model.enums;
 
 public enum AccountType {
     CASH("Cash"),

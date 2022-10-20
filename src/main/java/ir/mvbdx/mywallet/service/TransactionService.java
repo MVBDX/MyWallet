@@ -1,6 +1,6 @@
 package ir.mvbdx.mywallet.service;
 
-import ir.mvbdx.mywallet.entity.Transaction;
+import ir.mvbdx.mywallet.model.entity.Transaction;
 import org.springframework.data.domain.Page;
 
 import java.security.Principal;

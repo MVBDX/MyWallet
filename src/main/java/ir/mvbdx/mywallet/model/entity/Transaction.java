@@ -1,7 +1,7 @@
-package ir.mvbdx.mywallet.entity;
+package ir.mvbdx.mywallet.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import ir.mvbdx.mywallet.enumeration.TransactionType;
+import ir.mvbdx.mywallet.model.enums.TransactionType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

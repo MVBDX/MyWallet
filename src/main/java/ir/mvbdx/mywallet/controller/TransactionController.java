@@ -1,11 +1,11 @@
 package ir.mvbdx.mywallet.controller;
 
-import ir.mvbdx.mywallet.entity.Account;
-import ir.mvbdx.mywallet.entity.Category;
-import ir.mvbdx.mywallet.entity.Transaction;
-import ir.mvbdx.mywallet.entity.paging.Paged;
-import ir.mvbdx.mywallet.entity.paging.Paging;
-import ir.mvbdx.mywallet.enumeration.TransactionType;
+import ir.mvbdx.mywallet.model.entity.Account;
+import ir.mvbdx.mywallet.model.entity.Category;
+import ir.mvbdx.mywallet.model.entity.Transaction;
+import ir.mvbdx.mywallet.model.entity.paging.Paged;
+import ir.mvbdx.mywallet.model.entity.paging.Paging;
+import ir.mvbdx.mywallet.model.enums.TransactionType;
 import ir.mvbdx.mywallet.service.AccountService;
 import ir.mvbdx.mywallet.service.CategoryService;
 import ir.mvbdx.mywallet.service.CustomerService;

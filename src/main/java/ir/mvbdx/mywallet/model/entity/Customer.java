@@ -1,7 +1,7 @@
-package ir.mvbdx.mywallet.entity;
+package ir.mvbdx.mywallet.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import ir.mvbdx.mywallet.enumeration.CustomerStatus;
+import ir.mvbdx.mywallet.model.enums.CustomerStatus;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;

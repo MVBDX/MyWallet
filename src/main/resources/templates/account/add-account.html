@@ -20,7 +20,7 @@
                    th:placeholder="#{label.pages.account.enter.number}"/>
             <select th:field="*{type}" class="form-control col-4 mb-4" th:required="required">
                 <option value="" selected="selected" th:text="#{label.pages.account.select.type}"/>
-                <option th:each="t : ${T(ir.mvbdx.mywallet.enumeration.AccountType).values()}" th:value="${t}"
+                <option th:each="t : ${T(ir.mvbdx.mywallet.model.enums.AccountType).values()}" th:value="${t}"
                         th:text="${t.getDisplayValue()}"/>
             </select>
             <input type="text" th:field="*{balance}" class="form-control col-4 mb-4" th:required="required"

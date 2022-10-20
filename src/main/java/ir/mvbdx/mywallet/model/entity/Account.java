@@ -1,8 +1,8 @@
-package ir.mvbdx.mywallet.entity;
+package ir.mvbdx.mywallet.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import ir.mvbdx.mywallet.enumeration.AccountType;
+import ir.mvbdx.mywallet.model.enums.AccountType;
 import ir.mvbdx.mywallet.exception.AccountException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

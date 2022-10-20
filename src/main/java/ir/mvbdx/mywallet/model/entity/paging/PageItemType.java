@@ -1,4 +1,4 @@
-package ir.mvbdx.mywallet.entity.paging;
+package ir.mvbdx.mywallet.model.entity.paging;
 
 public enum PageItemType {
     DOTS,

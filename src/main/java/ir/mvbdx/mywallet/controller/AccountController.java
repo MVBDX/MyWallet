@@ -1,6 +1,6 @@
 package ir.mvbdx.mywallet.controller;
 
-import ir.mvbdx.mywallet.entity.Account;
+import ir.mvbdx.mywallet.model.entity.Account;
 import ir.mvbdx.mywallet.service.AccountService;
 import ir.mvbdx.mywallet.service.CustomerService;
 import lombok.RequiredArgsConstructor;

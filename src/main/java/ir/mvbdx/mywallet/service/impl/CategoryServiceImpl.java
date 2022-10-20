@@ -1,6 +1,6 @@
 package ir.mvbdx.mywallet.service.impl;
 
-import ir.mvbdx.mywallet.entity.Category;
+import ir.mvbdx.mywallet.model.entity.Category;
 import ir.mvbdx.mywallet.exception.EntityHaveRelationException;
 import ir.mvbdx.mywallet.exception.EntityNotFoundException;
 import ir.mvbdx.mywallet.repository.CategoryRepository;

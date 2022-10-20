@@ -1,8 +1,8 @@
 package ir.mvbdx.mywallet.service.impl;
 
-import ir.mvbdx.mywallet.entity.Account;
-import ir.mvbdx.mywallet.entity.Customer;
-import ir.mvbdx.mywallet.entity.Role;
+import ir.mvbdx.mywallet.model.entity.Account;
+import ir.mvbdx.mywallet.model.entity.Customer;
+import ir.mvbdx.mywallet.model.entity.Role;
 import ir.mvbdx.mywallet.repository.CustomerRepository;
 import ir.mvbdx.mywallet.service.CustomerService;
 import lombok.RequiredArgsConstructor;
@@ -38,6 +38,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer save(Customer customer) {
+//        if (customerRepository.findByEmail(customer.getUsername()).isPresent())
+//            throw new UsernameExistException("کاربری با این نام کاربری در سیستم وجود دارد!");
+//        customer.setRoles(List.of(new Role(RoleType.ROLE_CUSTOMER.name(), null)));
         customer.setPassword(passwordEncoder.encode(customer.getPassword()));
         return customerRepository.save(customer);
     }

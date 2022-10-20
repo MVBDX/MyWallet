@@ -19,7 +19,7 @@
             </ul>
             <input type="text" th:field="*{id}" th:readonly="true" class="form-control col-4 mb-4"/>
             <select th:field="*{type}" class="form-control col-4 mb-4" th:required="required">
-                <option th:each="t : ${T(ir.mvbdx.mywallet.enumeration.TransactionType).values()}" th:value="${t}"
+                <option th:each="t : ${T(ir.mvbdx.mywallet.model.enums.TransactionType).values()}" th:value="${t}"
                         th:text="${t.getDisplayValue()}"/>
             </select>
             <div th:with="condition=${accounts.empty}">

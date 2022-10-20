@@ -1,6 +1,6 @@
-package ir.mvbdx.mywallet.entity;
+package ir.mvbdx.mywallet.model.entity;
 
-import ir.mvbdx.mywallet.enumeration.CustomerPrivilege;
+import ir.mvbdx.mywallet.model.enums.CustomerPrivilege;
 import lombok.*;
 
 import javax.persistence.*;

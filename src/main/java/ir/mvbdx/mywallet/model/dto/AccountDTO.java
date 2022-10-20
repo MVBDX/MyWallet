@@ -1,13 +1,13 @@
-package ir.mvbdx.mywallet.dto;
+package ir.mvbdx.mywallet.model.dto;
 
-import ir.mvbdx.mywallet.enumeration.AccountType;
+import ir.mvbdx.mywallet.model.enums.AccountType;
+import ir.mvbdx.mywallet.model.entity.Account;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Set;
 
 /**
- * A DTO for the {@link ir.mvbdx.mywallet.entity.Account} entity
+ * A DTO for the {@link Account} entity
  */
 @Data
 public class AccountDTO implements Serializable {
@@ -17,5 +17,5 @@ public class AccountDTO implements Serializable {
     private AccountType type;
     private Double balance;
     private CustomerDTO customer;
-    private Set<TransactionDTO> transactions;
+//    private Set<TransactionDTO> transactions;
 }

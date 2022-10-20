@@ -1,4 +1,4 @@
-package ir.mvbdx.mywallet.entity.paging;
+package ir.mvbdx.mywallet.model.entity.paging;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

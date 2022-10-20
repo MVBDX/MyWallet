@@ -1,7 +1,7 @@
 package ir.mvbdx.mywallet.controller;
 
-import ir.mvbdx.mywallet.dto.CustomerDTO;
-import ir.mvbdx.mywallet.entity.Customer;
+import ir.mvbdx.mywallet.model.dto.CustomerDTO;
+import ir.mvbdx.mywallet.model.entity.Customer;
 import ir.mvbdx.mywallet.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

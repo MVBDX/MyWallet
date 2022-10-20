@@ -1,6 +1,6 @@
 package ir.mvbdx.mywallet.service;
 
-import ir.mvbdx.mywallet.entity.Category;
+import ir.mvbdx.mywallet.model.entity.Category;
 
 import java.util.List;
 

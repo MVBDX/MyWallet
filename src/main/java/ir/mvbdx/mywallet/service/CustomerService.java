@@ -1,7 +1,7 @@
 package ir.mvbdx.mywallet.service;
 
-import ir.mvbdx.mywallet.entity.Account;
-import ir.mvbdx.mywallet.entity.Customer;
+import ir.mvbdx.mywallet.model.entity.Account;
+import ir.mvbdx.mywallet.model.entity.Customer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.security.Principal;

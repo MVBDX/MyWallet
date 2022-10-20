@@ -1,7 +1,7 @@
 package ir.mvbdx.mywallet.service.impl;
 
-import ir.mvbdx.mywallet.entity.Account;
-import ir.mvbdx.mywallet.entity.Transaction;
+import ir.mvbdx.mywallet.model.entity.Account;
+import ir.mvbdx.mywallet.model.entity.Transaction;
 import ir.mvbdx.mywallet.exception.EntityNotFoundException;
 import ir.mvbdx.mywallet.repository.AccountRepository;
 import ir.mvbdx.mywallet.repository.CustomerRepository;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import java.security.Principal;
 import java.util.List;
 
-import static ir.mvbdx.mywallet.enumeration.TransactionType.*;
+import static ir.mvbdx.mywallet.model.enums.TransactionType.*;
 
 @Service
 @RequiredArgsConstructor
