@@ -1,11 +1,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="index">
-
 <head>
-    <title>Add Account</title>
+    <title th:text="#{label.pages.account.add}"/>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
-    <script th:src="@{/scripts/jquery.min.js}"></script>
+    <link th:href="@{/webjars/bootstrap/5.2.2/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>
+    <script th:src="@{/webjars/jquery/3.6.1/jquery.min.js}"></script>
     <script th:src="@{/scripts/jquery.inputmask.min.js}"></script>
 </head>
 <body>
