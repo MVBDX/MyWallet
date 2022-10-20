@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     protected void configure(HttpSecurity http) throws Exception {
 
-        String[] staticResources = {"/css/**", "/images/**", "/fonts/**", "/scripts/**"};
+        String[] staticResources = {"/css/**", "/images/**", "/fonts/**", "/scripts/**", "/webjars/**"};
 
         http
 //                .sessionManagement().maximumSessions(1).expiredUrl("/expired").maxSessionsPreventsLogin(false).and()
