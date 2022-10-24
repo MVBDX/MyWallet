@@ -39,7 +39,7 @@ public class Account extends BaseEntity {
     }
 
     public synchronized void withdraw(Double amount) {
-        if (this.getBalance() < amount)
+        if (balance < amount)
             throw new AccountException("Account balance is not enough!");
         balance -= amount;
     }

@@ -38,8 +38,8 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Set<Transaction> getTransactions(Long accountId) {
-        return accountRepository.findById(accountId).orElseThrow(() ->
-                new EntityNotFoundException(accountId, CLASS_NAME)).getTransactions();
+        return accountRepository.findById(accountId)
+                .orElseThrow(() -> new EntityNotFoundException(accountId, CLASS_NAME)).getTransactions();
     }
 
     @Override
