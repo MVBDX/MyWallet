@@ -15,8 +15,22 @@ spring:
     suffix: .html
   mvc:
     hiddenmethod.filter.enabled: true
+  output:
+    ansi:
+      enabled: DETECT
 server:
   port: 6060
+logging:
+  level:
+    root: ERROR
+    org.springframework.web: ERROR
+    org.hibernate: ERROR
+    ir.mvbdx.mywallet: DEBUG
+  file:
+    name: /logs/application-debug.log
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss} - %msg%n'
+    file: '%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n'
 ---
 spring:
   config:
