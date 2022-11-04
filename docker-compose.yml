@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+  app:
+    ports:
+      - "6060:6060"
+    image: 'mywallet:latest'
+    build:
+      context: src/main/docker
+    container_name: mywallet
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/wallet?createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=mvbdx
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+  db:
+    image: 'mysql:latest'
+    container_name: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=mvbdx
