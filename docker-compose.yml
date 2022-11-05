@@ -6,7 +6,7 @@ services:
       - "6060:6060"
     image: 'mywallet:latest'
     build:
-      context: src/main/docker
+      context: .
     container_name: mywallet
     depends_on:
       - db
