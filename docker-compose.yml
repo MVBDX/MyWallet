@@ -1,23 +1,33 @@
-version: '2'
+version: '3'
 
 services:
+  docker-mysql:
+    restart: always
+    container_name: mysql
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: mvbdx
+    ports:
+      - "6033:3306"
+    healthcheck:
+      test: "/usr/bin/mysql --user=root --password=mvbdx--execute \"SHOW DATABASES;\""
+      interval: 2s
+      timeout: 20s
+      retries: 10
+
   app:
+    restart: on-failure
+    container_name: mywallet
+    image: 'mywallet:latest'
+    build: .
+    expose:
+      - "6060"
     ports:
       - "6060:6060"
-    image: 'mywallet:latest'
-    build:
-      context: .
-    container_name: mywallet
+    environment:
+        - SPRING_DATASOURCE_URL=jdbc:mysql://docker-mysql:3306/wallet?createDatabaseIfNotExist=true
+        - SPRING_DATASOURCE_USERNAME=root
+        - SPRING_DATASOURCE_PASSWORD=mvbdx
+        - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     depends_on:
-      - db
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/wallet?createDatabaseIfNotExist=true
-      - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=mvbdx
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-
-  db:
-    image: 'mysql:latest'
-    container_name: mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=mvbdx
+      - docker-mysql
