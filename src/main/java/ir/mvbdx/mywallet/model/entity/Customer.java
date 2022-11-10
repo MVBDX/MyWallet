@@ -7,8 +7,7 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -24,9 +23,11 @@ import java.util.stream.Collectors;
 public class Customer extends BaseEntity {
     private String username;
     @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$",
-            message = "{label.pages.register.password.error}")
+            message = "{label.pages.register.error.password}")
     private String password;
+    @Size(max = 20, min = 3, message = "{label.pages.register.error.firstname}")
     private String firstName;
+    @Size(max = 30, min = 3, message = "{label.pages.register.error.lastname}")
     private String lastName;
     @Column(unique = true, nullable = false)
     @Email
