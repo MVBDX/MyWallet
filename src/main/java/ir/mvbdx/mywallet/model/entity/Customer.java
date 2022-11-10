@@ -7,6 +7,8 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -21,10 +23,13 @@ import java.util.stream.Collectors;
 @Builder
 public class Customer extends BaseEntity {
     private String username;
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$",
+            message = "{label.pages.register.password.error}")
     private String password;
     private String firstName;
     private String lastName;
     @Column(unique = true, nullable = false)
+    @Email
     private String email;
     private String phone;
     @JsonManagedReference
