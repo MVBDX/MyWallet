@@ -19,7 +19,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/account")
+@RequestMapping("/api/v1/account")
 @RequiredArgsConstructor
 public class
 AccountRestController {
