@@ -1,5 +1,5 @@
 
-- 🌱 This is a self-challenging project to became expert in **Java Core, Spring, SOLID, Design Patterns and other programming skills like unit testing**
+- 🌱 This is a self-challenging project to became expert in **Java Core, Spring, REST APIs, SOLID, Design Patterns and other programming skills like unit testing**
 
 # Java / Spring Boot Project - Accounts Financial Management System
 
