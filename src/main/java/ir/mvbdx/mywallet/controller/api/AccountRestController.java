@@ -25,30 +25,30 @@ public class
 AccountRestController {
     private final AccountService accountService;
     private final CustomerService customerService;
-    private final ModelMapper modelMapper;
+    private final ModelMapper mapper;
 
     @GetMapping({"/list", "/"})
 //    @ResponseStatus(HttpStatus.OK)
     public List<AccountDTO> findAll() {
         return accountService.findAll().stream()
-                .map(account -> modelMapper.map(account, AccountDTO.class)).collect(Collectors.toList());
+                .map(account -> mapper.map(account, AccountDTO.class)).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
     public AccountDTO find(@PathVariable("id") Long id) {
-        return modelMapper.map(accountService.findById(id), AccountDTO.class);
+        return mapper.map(accountService.findById(id), AccountDTO.class);
     }
 
     @PostMapping("/save")
     public Account save(@Valid @RequestBody AccountDTO accountDTO, Principal principal) {
-        accountDTO.setCustomer(modelMapper.map(customerService.findCustomer(principal), CustomerDTO.class));
-        return accountService.save(modelMapper.map(accountDTO, Account.class));
+        accountDTO.setCustomer(mapper.map(customerService.findCustomer(principal), CustomerDTO.class));
+        return accountService.save(mapper.map(accountDTO, Account.class));
     }
 
     @PutMapping("/edit")
     public Account update(@Valid @RequestBody AccountDTO accountDTO, Principal principal) {
-        accountDTO.setCustomer(modelMapper.map(customerService.findCustomer(principal), CustomerDTO.class));
-        return accountService.update(accountDTO.getId(), modelMapper.map(accountDTO, Account.class));
+        accountDTO.setCustomer(mapper.map(customerService.findCustomer(principal), CustomerDTO.class));
+        return accountService.update(accountDTO.getId(), mapper.map(accountDTO, Account.class));
     }
 
     @DeleteMapping("/delete/{id}")
@@ -61,7 +61,7 @@ AccountRestController {
     @GetMapping("/{id}/transactions")
     public Set<TransactionDTO> findAllTransactions(@PathVariable("id") Long id){
         return accountService.getTransactions(id).stream()
-                .map(transaction -> modelMapper.map(transaction,TransactionDTO.class)).collect(Collectors.toSet());
+                .map(transaction -> mapper.map(transaction,TransactionDTO.class)).collect(Collectors.toSet());
     }
 
 }
