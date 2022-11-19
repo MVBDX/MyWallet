@@ -25,9 +25,9 @@ public class Customer extends BaseEntity {
     @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$",
             message = "{label.pages.register.error.password}")
     private String password;
-    @Size(max = 20, min = 3, message = "{label.pages.register.error.firstname}")
+    @Size(min = 3, max = 20, message = "{label.pages.register.error.firstname}")
     private String firstName;
-    @Size(max = 30, min = 3, message = "{label.pages.register.error.lastname}")
+    @Size(min = 3, max = 30, message = "{label.pages.register.error.lastname}")
     private String lastName;
     @Column(unique = true, nullable = false)
     @Email
