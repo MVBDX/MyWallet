@@ -14,9 +14,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.List;
@@ -33,6 +35,19 @@ public class TransactionController {
     private final AccountService accountService;
     private final CustomerService customerService;
 
+    @GetMapping({"/list", "/"})
+    public ModelAndView listAll(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") int pageNumber,
+                                @RequestParam(value = "pageSize", required = false, defaultValue = "15") int pageSize, Principal principal) {
+        var mav = new ModelAndView("transaction/list-transaction");
+        Page<Transaction> transactions = transactionService.findAllByCustomerOrderByDate(pageNumber, pageSize, principal);
+        mav.addObject("transactions", new Paged<>(transactions, Paging.of(transactions.getTotalPages(), pageNumber, pageSize)));
+        mav.addObject("totalIncome", transactionService.totalIncome(principal));
+        mav.addObject("totalSpend", transactionService.totalSpend(principal));
+        mav.addObject("totalBalance", transactionService.totalBalance(principal));
+        mav.addObject("totalAccountsBalance", accountService.totalBalance(principal));
+        return mav;
+    }
+
     @GetMapping("/new")
     public String newForm(Model model, Principal principal) {
         List<Category> categoryList = categoryService.findAll();
@@ -48,21 +63,11 @@ public class TransactionController {
         return "transaction/add-transaction";
     }
 
-    @GetMapping({"/list", "/"})
-    public ModelAndView listAll(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") int pageNumber,
-                                @RequestParam(value = "pageSize", required = false, defaultValue = "15") int pageSize, Principal principal) {
-        ModelAndView mav = new ModelAndView("transaction/list-transaction");
-        Page<Transaction> transactions = transactionService.findAllByCustomerOrderByDate(pageNumber, pageSize, principal);
-        mav.addObject("transactions", new Paged<>(transactions, Paging.of(transactions.getTotalPages(), pageNumber, pageSize)));
-        mav.addObject("totalIncome", transactionService.totalIncome(principal));
-        mav.addObject("totalSpend", transactionService.totalSpend(principal));
-        mav.addObject("totalBalance", transactionService.totalBalance(principal));
-        mav.addObject("totalAccountsBalance", accountService.totalBalance(principal));
-        return mav;
-    }
-
     @PostMapping("/save")
-    public String saveForm(@ModelAttribute("transactionForm") Transaction transaction) {
+    public String saveForm(@Valid @ModelAttribute("transactionForm") Transaction transaction, BindingResult result) {
+        if (result.hasErrors())
+            return "transaction/add-transaction";
+
         transactionService.save(transaction);
         return "redirect:/transaction/list";
     }
