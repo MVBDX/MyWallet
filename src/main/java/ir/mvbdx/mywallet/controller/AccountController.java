@@ -26,7 +26,7 @@ public class AccountController {
 
     @GetMapping({"/list", "/"})
     public ModelAndView listAll(Principal principal) {
-        ModelAndView mav = new ModelAndView("account/list-account");
+        var mav = new ModelAndView("account/list-account");
         mav.addObject("accounts", customerService.accountsOfCustomer(principal));
         mav.addObject("totalBalance", accountService.totalBalance(principal));
         return mav;

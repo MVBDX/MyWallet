@@ -23,7 +23,7 @@ public class CategoryController {
 
     @GetMapping({"/list"})
     public ModelAndView listAll() {
-        ModelAndView mav = new ModelAndView("category/list-category");
+        var mav = new ModelAndView("category/list-category");
         mav.addObject("categories", categoryService.findAll());
         return mav;
     }
