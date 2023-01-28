@@ -5,7 +5,7 @@
 
 ## What you need to run this app?
 * Maven
-* JDK 11
+* JDK 17
 * MySQL (or you can change active profile to using H2 in `src/main/resources/application.yml` file)
 
 ## How to run this app?
