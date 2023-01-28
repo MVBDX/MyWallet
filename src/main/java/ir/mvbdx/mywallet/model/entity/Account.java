@@ -11,7 +11,7 @@ import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.Set;
 
 @Entity
@@ -40,7 +40,7 @@ public class Account extends BaseEntity {
 
     public synchronized void withdraw(Double amount) {
         if (balance < amount)
-            throw new AccountException("Account balance is not enough!");
+            throw new AccountException("Balance is insufficient!");
         balance -= amount;
     }
 

@@ -2,7 +2,7 @@ package ir.mvbdx.mywallet.model.entity;
 
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.Set;
 
 @Entity

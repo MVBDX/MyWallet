@@ -10,7 +10,8 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Past;
 import java.util.Date;
 
 @Entity
@@ -36,5 +37,6 @@ public class Transaction extends BaseEntity {
     private String note;
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Past(message = "Selected date is in future!")
     private Date date;
 }

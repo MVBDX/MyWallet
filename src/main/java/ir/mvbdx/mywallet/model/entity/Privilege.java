@@ -3,7 +3,7 @@ package ir.mvbdx.mywallet.model.entity;
 import ir.mvbdx.mywallet.model.enums.CustomerPrivilege;
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.Collection;
 
 @Entity

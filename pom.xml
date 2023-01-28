@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ir.mvbdx</groupId>
     <artifactId>MyWallet</artifactId>
-    <version>0.2.1-SNAPSHOT</version>
+    <version>0.3.1-SNAPSHOT</version>
     <name>MyWallet</name>
     <description>MyWallet</description>
 
@@ -14,12 +14,13 @@
         <thymeleaf-layout-dialect.version>3.1.0</thymeleaf-layout-dialect.version>
         <bootstrap.version>5.2.2</bootstrap.version>
         <jquery.version>3.6.1</jquery.version>
+        <swagger.version>3.0.0</swagger.version>
     </properties>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.5</version>
+        <version>3.0.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -114,6 +115,22 @@
             <artifactId>jquery</artifactId>
             <version>${jquery.version}</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <!-- provides easy-to-use but flexible wrapper around reflection and introspection -->
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.9.4</version>
         </dependency>
     </dependencies>
 
