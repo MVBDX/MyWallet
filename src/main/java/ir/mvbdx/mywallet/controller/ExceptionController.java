@@ -1,13 +1,15 @@
 package ir.mvbdx.mywallet.controller;
 
 import ir.mvbdx.mywallet.exception.EntityNotFoundException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import ir.mvbdx.mywallet.exception.UsernameExistException;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-@ControllerAdvice
+@ControllerAdvice(annotations = Controller.class)
 public class ExceptionController {
 
     // For UI Pages
@@ -17,10 +19,10 @@ public class ExceptionController {
         return "error";
     }
 
-    /*For REST APIs
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<?> illegalArgumentException(IllegalArgumentException ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
-    }*/
+    @ExceptionHandler(UsernameExistException.class)
+    public String usernameExistException(EntityNotFoundException exception, Model model, BindingResult result) {
+        result.addError(new FieldError("email", "email", "advice"));
+        return "register";
+    }
 
 }
