@@ -26,7 +26,7 @@ public class Logging {
     @Pointcut("execution(* set*(..))")
     private void forSetterMethods() { }
 
-    @Before("forServicePackage() && !forSetterMethods() && !forGetterMethods() || @annotation(LogAop)")
+    @Before("forServicePackage() && !forSetterMethods() && !forGetterMethods() || @annotation(Loggable)")
     public void beforeAllServiceMethods(JoinPoint joinPoint) {
         LOGGER.info("@Before execute of :: " + joinPoint.getSignature().getDeclaringType().getSimpleName()
                 + "." + joinPoint.getSignature().getName());
