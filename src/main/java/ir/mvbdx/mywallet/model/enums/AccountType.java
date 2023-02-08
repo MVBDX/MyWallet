@@ -3,7 +3,8 @@ package ir.mvbdx.mywallet.model.enums;
 public enum AccountType {
     CASH("Cash"),
     BANK_ACCOUNT("Bank Account"),
-    CRYPTO_CURRENCY("Cryptocurrency");
+    CRYPTO_CURRENCY("Cryptocurrency"),
+    BON_CARD("Bon Card");
 
     private final String displayValue;
 
