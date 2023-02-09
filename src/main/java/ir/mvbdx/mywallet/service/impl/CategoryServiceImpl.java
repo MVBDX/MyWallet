@@ -1,8 +1,7 @@
 package ir.mvbdx.mywallet.service.impl;
 
+import ir.mvbdx.mywallet.exception.DBException;
 import ir.mvbdx.mywallet.model.entity.Category;
-import ir.mvbdx.mywallet.exception.EntityHaveRelationException;
-import ir.mvbdx.mywallet.exception.EntityNotFoundException;
 import ir.mvbdx.mywallet.repository.CategoryRepository;
 import ir.mvbdx.mywallet.service.CategoryService;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +22,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category findById(Long id) {
-        return categoryRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id, CLASS_NAME));
+        return categoryRepository.findById(id).orElseThrow(() -> new DBException.EntityNotFoundException(CLASS_NAME, id));
     }
 
     @Override
@@ -33,15 +32,15 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category update(Long id, Category category) {
-        categoryRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id, CLASS_NAME));
+        categoryRepository.findById(id).orElseThrow(() -> new DBException.EntityNotFoundException(CLASS_NAME, id));
         return categoryRepository.save(category);
     }
 
     @Override
     public void delete(Long id) {
-        Category category = categoryRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id, CLASS_NAME));
+        Category category = categoryRepository.findById(id).orElseThrow(() -> new DBException.EntityNotFoundException(CLASS_NAME, id));
         if (!category.getTransactions().isEmpty() || !category.getSubordinates().isEmpty())
-            throw new EntityHaveRelationException(CLASS_NAME + " " + category.getName(), id);
+            throw new DBException.EntityHaveRelationException(CLASS_NAME + " " + category.getName(), id);
         categoryRepository.deleteById(id);
     }
 }

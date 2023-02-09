@@ -1,9 +1,8 @@
 package ir.mvbdx.mywallet.service.impl;
 
+import ir.mvbdx.mywallet.exception.DBException;
 import ir.mvbdx.mywallet.model.entity.Account;
 import ir.mvbdx.mywallet.model.entity.Transaction;
-import ir.mvbdx.mywallet.exception.EntityHaveRelationException;
-import ir.mvbdx.mywallet.exception.EntityNotFoundException;
 import ir.mvbdx.mywallet.repository.AccountRepository;
 import ir.mvbdx.mywallet.repository.CustomerRepository;
 import ir.mvbdx.mywallet.repository.TransactionRepository;
@@ -28,18 +27,18 @@ public class AccountServiceImpl implements AccountService {
 
     public Double totalIncome(Long accountId) {
         return transactionRepository.totalOfAccount(accountRepository.findById(accountId)
-                .orElseThrow(() -> new EntityNotFoundException(accountId, CLASS_NAME)).getId(), DEPOSIT);
+                .orElseThrow(() -> new DBException.EntityNotFoundException(CLASS_NAME, accountId)).getId(), DEPOSIT);
     }
 
     public Double totalOutcome(Long accountId) {
         return transactionRepository.totalOfAccount(accountRepository.findById(accountId)
-                .orElseThrow(() -> new EntityNotFoundException(accountId, CLASS_NAME)).getId(), WITHDRAW);
+                .orElseThrow(() -> new DBException.EntityNotFoundException(CLASS_NAME, accountId)).getId(), WITHDRAW);
     }
 
     @Override
     public Set<Transaction> getTransactions(Long accountId) {
         return accountRepository.findById(accountId)
-                .orElseThrow(() -> new EntityNotFoundException(accountId, CLASS_NAME)).getTransactions();
+                .orElseThrow(() -> new DBException.EntityNotFoundException(CLASS_NAME, accountId)).getTransactions();
     }
 
     @Override
@@ -54,7 +53,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account findById(Long id) {
-        return accountRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id, CLASS_NAME));
+        return accountRepository.findById(id).orElseThrow(() -> new DBException.EntityNotFoundException(CLASS_NAME, id));
     }
 
     @Override
@@ -64,15 +63,15 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account update(Long id, Account account) {
-        accountRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id, CLASS_NAME));
+        accountRepository.findById(id).orElseThrow(() -> new DBException.EntityNotFoundException(CLASS_NAME, id));
         return accountRepository.save(account);
     }
 
     @Override
     public Boolean delete(Long id) {
-        Account account = accountRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id, CLASS_NAME));
+        Account account = accountRepository.findById(id).orElseThrow(() -> new DBException.EntityNotFoundException(CLASS_NAME, id));
         if (!account.getTransactions().isEmpty())
-            throw new EntityHaveRelationException(CLASS_NAME + " " + account.getName(), id);
+            throw new DBException.EntityHaveRelationException(CLASS_NAME + " " + account.getName(), id);
         accountRepository.deleteById(id);
         return Boolean.TRUE;
     }
