@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link th:href="@{/webjars/bootstrap/5.2.2/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>
-    <script th:src="@{/webjars/jquery/3.6.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/jquery/3.6.4/jquery.min.js}"></script>
     <script th:src="@{/scripts/jquery.inputmask.min.js}"></script>
 </head>
 <body>
@@ -46,6 +46,7 @@
                    th:placeholder="#{label.pages.transaction.enter.amount}"/>
             <!--               data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '﷼ '"-->
             <input type="date" th:field="*{date}" class="form-control col-4 mb-4" th:required="required"/>
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></div>
             <button type="submit" th:disabled="${accounts.empty || categories.empty}" class="btn btn-success"
                     th:text="#{label.pages.action.save}"/>
             <a th:href="@{/transaction/list}" class="btn btn-warning" th:text="#{label.pages.action.cancel}"/>

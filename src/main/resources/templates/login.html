@@ -4,7 +4,7 @@
     <title th:text="#{label.pages.login}"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link th:href="@{/webjars/bootstrap/5.2.2/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>
-    <script th:src="@{/webjars/jquery/3.6.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/jquery/3.6.4/jquery.min.js}"></script>
     <style>
         .divider:after,
         .divider:before {content: "";flex: 1;height: 1px;background: #eee;}
@@ -38,7 +38,7 @@
                                th:placeholder="#{label.pages.home.password.placeholder}"/>
                         <label class="form-label" for="password" th:text="#{label.pages.home.password}"/>
                     </div>
-                    <p th:if="${param.error}" class="alert alert-danger" th:text="#{label.pages.error.register}"/>
+                    <p th:if="${param.error}" class="alert alert-danger" th:text="#{label.pages.error.login}"/>
 
                     <div class="d-flex justify-content-between align-items-center">
                         <!-- Checkbox -->

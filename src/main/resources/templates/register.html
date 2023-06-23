@@ -4,7 +4,7 @@
     <meta charset="ISO-8859-1">
     <title th:text="#{label.pages.register.title}"/>
     <link th:href="@{/webjars/bootstrap/5.2.2/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>
-    <script th:src="@{/webjars/jquery/3.6.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/jquery/3.6.4/jquery.min.js}"></script>
     <script th:src="@{/scripts/jquery.inputmask.min.js}"></script>
 </head>
 <body>
@@ -49,6 +49,22 @@
                                             <input type="text" class="form-control" th:required="required" id="family" th:field="*{lastName}"/>
                                             <label class="form-label" for="family" th:text="#{label.pages.register.family}"/>
                                             <div class="alert alert-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
+                                        </div>
+                                    </div>
+                                    <div th:object="${captchaDTO}" >
+                                        <div class="row">
+                                            <div class="col-2"></div>
+                                            <div class="col-4">
+                                                <img th:src="*{'data:image/png;base64,'+ image}" />
+                                            </div>
+                                        </div>
+                                        <div class="form-outline mb-3">
+                                            <input type="text" name="captcha" id="captcha" class="form-control form-control-lg"
+                                                   th:placeholder="#{label.pages.home.captcha.placeholder}"/>
+                                            <input type="hidden" th:field="*{hidden}" />
+                                            <label class="form-label" for="captcha" th:text="#{label.pages.home.captcha}"/>
+                                            <div class="alert alert-danger" th:if="${#fields.hasErrors('captcha')}" th:errors="*{captcha}"></div>
+                                            <p th:if="${param.error}" class="alert alert-danger" th:text="#{label.pages.error.captcha}"/>
                                         </div>
                                     </div>
 <!--                                    <div class="form-check d-flex justify-content-center mb-5">
