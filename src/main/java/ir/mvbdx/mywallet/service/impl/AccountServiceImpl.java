@@ -47,6 +47,11 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public Double totalBalanceWithoutCredits(Principal principal) {
+        return accountRepository.totalBalanceWithoutCredits(customerRepository.findByEmail(principal.getName()));
+    }
+
+    @Override
     public Account save(Account account) {
         return accountRepository.save(account);
     }

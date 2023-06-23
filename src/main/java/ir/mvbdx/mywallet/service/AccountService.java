@@ -12,6 +12,8 @@ public interface AccountService {
 
     Double totalBalance(Principal principal);
 
+    Double totalBalanceWithoutCredits(Principal principal);
+
     Account save(Account account);
 
     Account findById(Long id);

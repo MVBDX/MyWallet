@@ -8,10 +8,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import jakarta.persistence.*;
+
 import java.util.Set;
 
 @Entity
@@ -21,6 +24,8 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@DynamicInsert
+@DynamicUpdate
 public class Account extends BaseEntity {
     private String name;
     private String number;
@@ -39,7 +44,7 @@ public class Account extends BaseEntity {
     }
 
     public synchronized void withdraw(Double amount) {
-        if (balance < amount)
+        if (type != AccountType.CREDIT && balance < amount)
             throw new AccountException("Balance is insufficient!");
         balance -= amount;
     }

@@ -12,4 +12,7 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
     @Query("SELECT SUM(a.balance) FROM Account AS a WHERE a.customer = ?1")
     Double totalBalance(Customer customer);
 
+    @Query("SELECT SUM(a.balance) FROM Account AS a WHERE a.customer = ?1 and a.type != AccountType.CREDIT")
+    Double totalBalanceWithoutCredits(Customer customer);
+
 }

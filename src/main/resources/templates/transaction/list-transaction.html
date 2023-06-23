@@ -53,8 +53,9 @@
                 <td th:text="#{label.pages.transaction.footer.balance} + ': ' + ${#numbers.formatDecimal(totalBalance, 0, 'COMMA', 0, 'POINT')}"
                     th:style="'color:blue; background-color:deepskyblue'"></td>
                 <td th:text="#{label.pages.transaction.footer.stock} + ': ' + ${#numbers.formatDecimal(totalAccountsBalance, 0, 'COMMA', 0, 'POINT')}"
+                    th:style="'color:white; background-color:#FFD700'"></td>
+                <td th:text="#{label.pages.transaction.footer.stock.without.credits} + ': ' + ${#numbers.formatDecimal(totalAccountsBalanceWithoutCredits, 0, 'COMMA', 0, 'POINT')}"
                     th:style="'color:white; background-color:lightgreen'"></td>
-                <td></td>
                 <td></td>
                 <td th:class="text-center"><a th:href="@{new}" class="btn btn-sm btn-success" th:text="#{label.pages.transaction.add}"/></td>
             </tr>

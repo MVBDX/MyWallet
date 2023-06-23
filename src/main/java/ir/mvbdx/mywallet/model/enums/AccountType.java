@@ -4,7 +4,8 @@ public enum AccountType {
     CASH("Cash"),
     BANK_ACCOUNT("Bank Account"),
     CRYPTO_CURRENCY("Cryptocurrency"),
-    BON_CARD("Bon Card");
+    BON_CARD("Bon Card"),
+    CREDIT("Credit");
 
     private final String displayValue;
 

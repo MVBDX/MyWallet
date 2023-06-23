@@ -29,6 +29,7 @@ public class AccountController {
         var mav = new ModelAndView("account/list-account");
         mav.addObject("accounts", customerService.accountsOfCustomer(principal));
         mav.addObject("totalBalance", accountService.totalBalance(principal));
+        mav.addObject("totalBalanceWithoutCredits", accountService.totalBalanceWithoutCredits(principal));
         return mav;
     }
 

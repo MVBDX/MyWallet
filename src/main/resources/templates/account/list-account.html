@@ -39,10 +39,11 @@
             <tr>
                 <td></td>
                 <td style="background-color: black; color: yellow" th:text="#{label.pages.transaction.footer.total}"/>
-                <td th:text="${#numbers.formatDecimal(totalBalance, 0, 'COMMA', 0, 'POINT')}"
+                <td></td>
+                <td th:text="${#numbers.formatDecimal(totalBalanceWithoutCredits, 0, 'COMMA', 0, 'POINT')}"
                     th:style="'color:white; background-color:green'"></td>
-                <td></td>
-                <td></td>
+                <td th:text="${#numbers.formatDecimal(totalBalance, 0, 'COMMA', 0, 'POINT')}"
+                    th:style="'color:white; background-color:#FFD700'"></td>
                 <td th:class="text-center"><a th:href="@{new}" class="btn btn-sm btn-success" th:text="#{label.pages.account.add}"/></td>
             </tr>
             </tfoot>
