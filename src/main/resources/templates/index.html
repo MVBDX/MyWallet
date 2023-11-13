@@ -3,8 +3,8 @@
     <meta charset="UTF-8"/>
     <title>MyWallet</title>
     <title th:text="#{label.pages.home.title}"/>
-    <link th:href="@{/webjars/bootstrap/5.2.2/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>
-    <script th:src="@{/webjars/jquery/3.6.4/jquery.min.js}"></script>
+    <link th:href="@{/webjars/bootstrap/__(${@environment.getProperty('webjar.bootstrap.version')})__/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>
+    <script th:src="@{/webjars/jquery/__(${@environment.getProperty('webjar.jquery.version')})__/jquery.min.js}"></script>
     <script th:src="@{/scripts/internationalization.js}"></script>
 </head>
 <body>

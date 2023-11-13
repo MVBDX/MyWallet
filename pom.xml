@@ -12,8 +12,8 @@
         <java.version>17</java.version>
         <modelmapper.version>3.1.1</modelmapper.version>
         <thymeleaf-layout-dialect.version>3.2.0</thymeleaf-layout-dialect.version>
-        <bootstrap.version>5.2.2</bootstrap.version>
-        <jquery.version>3.6.4</jquery.version>
+        <bootstrap.version>5.3.2</bootstrap.version>
+        <jquery.version>3.7.1</jquery.version>
         <openapi.version>2.0.2</openapi.version>
         <simplecaptcha.version>1.2.2</simplecaptcha.version>
     </properties>
